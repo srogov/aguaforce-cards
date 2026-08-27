@@ -22,8 +22,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { sortOptions } from '@/data/sort-options'
 import { filters } from '@/data/filters'
-import { newArrivalsProducts } from '@/data/new-arrivals-products'
-import { moreProducts } from '@/data/more-products'
+import { cards } from '@/data/cards'
 
 export default function Home() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
@@ -126,9 +125,9 @@ export default function Home() {
       <main>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="py-24 text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">Exercise Library</h1>
             <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
-              Thoughtfully designed objects for the workspace, home, and travel.
+              Exercises to perform using your AguaForce water weights.
             </p>
           </div>
 
@@ -248,35 +247,37 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Product grid */}
-          <section aria-labelledby="products-heading" className="mt-8">
-            <h2 id="products-heading" className="sr-only">
-              Products
+          {/* Card grid */}
+          <section aria-labelledby="cards-heading" className="mt-8">
+            <h2 id="cards-heading" className="sr-only">
+              Exercises
             </h2>
 
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-              {newArrivalsProducts.map((product) => (
-                <a key={product.id} href={product.href} className="group">
-                  <div className="relative aspect-square w-full overflow-hidden rounded-lg sm:aspect-2/3">
+              {cards.map((card) => (
+                <div key={card.id} className="group">
+                  <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-gray-100 sm:aspect-2/3">
                     <Image
-                      alt={product.imageAlt}
-                      src={product.imageSrc}
+                      alt={card.imageAlt}
+                      src={card.imageSrc}
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       className="object-cover group-hover:opacity-75"
                     />
                   </div>
-                  <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
-                    <h3>{product.name}</h3>
-                    <p>{product.price}</p>
+                  <div className="mt-4">
+                    <h3 className="text-base font-medium text-gray-900">{card.name}</h3>
+                    <p className="mt-1 text-sm text-gray-500">{card.muscles.join(', ')}</p>
+                    {card.muscles2.length > 0 && (
+                      <p className="mt-1 text-xs text-gray-400">{card.muscles2.join(', ')}</p>
+                    )}
                   </div>
-                  <p className="mt-1 text-sm text-gray-500 italic">{product.description}</p>
-                </a>
+                </div>
               ))}
             </div>
           </section>
 
-          <section aria-labelledby="featured-heading" className="relative mt-16 overflow-hidden rounded-lg lg:h-96">
+          <section aria-labelledby="featured-heading" className="relative mt-16 mb-24 overflow-hidden rounded-lg lg:h-96">
             <div className="absolute inset-0">
               <Image
                 alt=""
@@ -303,33 +304,6 @@ export default function Home() {
               >
                 View the collection
               </a>
-            </div>
-          </section>
-
-          <section aria-labelledby="more-products-heading" className="mt-16 pb-24">
-            <h2 id="more-products-heading" className="sr-only">
-              More products
-            </h2>
-
-            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-              {moreProducts.map((product) => (
-                <a key={product.id} href={product.href} className="group">
-                  <div className="relative aspect-square w-full overflow-hidden rounded-lg sm:aspect-2/3">
-                    <Image
-                      alt={product.imageAlt}
-                      src={product.imageSrc}
-                      fill
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover group-hover:opacity-75"
-                    />
-                  </div>
-                  <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
-                    <h3>{product.name}</h3>
-                    <p>{product.price}</p>
-                  </div>
-                  <p className="mt-1 text-sm text-gray-500 italic">{product.description}</p>
-                </a>
-              ))}
             </div>
           </section>
         </div>
