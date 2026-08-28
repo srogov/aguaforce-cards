@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { HeartIcon, ArrowDownTrayIcon } from '@heroicons/react/20/solid'
-import { getCardById } from '@/services/cards-service'
+import { getCardById, getCardImageDownloadName } from '@/services/cards-service'
 import { BackLink } from '@/components/back-link'
 
 type StepsBlock =
@@ -87,13 +87,14 @@ export default async function CardPage({
                 <HeartIcon aria-hidden="true" className="size-5" />
                 Like
               </button>
-              <button
-                type="button"
+              <a
+                href={card.imageSrc}
+                download={getCardImageDownloadName(card)}
                 className="flex w-full items-center justify-center gap-x-2 rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 focus:outline-hidden"
               >
                 <ArrowDownTrayIcon aria-hidden="true" className="size-5" />
                 Download
-              </button>
+              </a>
             </div>
 
             <div className="mt-10 border-t border-gray-200 pt-10">
