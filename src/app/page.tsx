@@ -256,13 +256,14 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
               {cards.map((card) => (
                 <div key={card.id} className="group">
-                  <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-gray-100 sm:aspect-2/3">
+                  <div className="overflow-hidden rounded-lg bg-gray-100 shadow-sm">
                     <Image
                       alt={card.imageAlt}
                       src={card.imageSrc}
-                      fill
+                      width={1050}
+                      height={750}
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover group-hover:opacity-75"
+                      className="h-auto w-full group-hover:opacity-75"
                     />
                   </div>
                   <div className="mt-4">
