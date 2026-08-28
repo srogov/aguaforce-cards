@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { HeartIcon, ArrowDownTrayIcon } from '@heroicons/react/20/solid'
 import { getCardById } from '@/services/cards-service'
+import { BackLink } from '@/components/back-link'
 
 type StepsBlock =
   | { type: 'heading'; text: string }
@@ -52,8 +53,10 @@ export default async function CardPage({
   return (
     <div className="bg-white">
       <div className="mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <BackLink href="/" label="All Exercises" />
+
         {/* Card */}
-        <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
+        <div className="mt-8 lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
           {/* Card image */}
           <div className="lg:col-span-4 lg:row-end-1">
             <Image
