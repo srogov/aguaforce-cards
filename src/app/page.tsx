@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   Dialog,
   DialogBackdrop,
@@ -261,7 +262,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
               {visibleCards.map((card) => (
-                <div key={card.id} className="group">
+                <Link key={card.id} href={`/${card.id}/${card.slug}`} className="group">
                   <div className="overflow-hidden rounded-lg bg-gray-100 shadow-sm">
                     <Image
                       alt={card.imageAlt}
@@ -279,7 +280,7 @@ export default function Home() {
                       <p className="mt-1 text-xs text-gray-400">{card.muscles2.join(', ')}</p>
                     )}
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </section>

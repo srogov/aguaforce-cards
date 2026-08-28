@@ -30,6 +30,10 @@ export function getCards(options: GetCardsOptions = {}): Cards[] {
   return sortCards(filtered, options.sortBy)
 }
 
+export function getCardById(id: string): Cards | undefined {
+  return cards.find((card) => card.id === id)
+}
+
 export function getMuscleOptions(): string[] {
   return Array.from(new Set(cards.flatMap((card) => [...card.muscles, ...card.muscles2]))).sort(
     (a, b) => a.localeCompare(b),
