@@ -21,12 +21,13 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { sortOptions } from '@/data/sort-options'
-import { getCards, getMuscleOptions } from '@/services/cards-service'
+import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
 import type { CardSortBy } from '@/services/cards-service'
 
 export default function Home() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [selectedMuscles, setSelectedMuscles] = useState<string[]>([])
+  const [selectedTargetAreas, setSelectedTargetAreas] = useState<string[]>([])
   const [sortBy, setSortBy] = useState<CardSortBy>('main')
 
   function toggleMuscle(muscle: string) {
@@ -35,11 +36,23 @@ export default function Home() {
     )
   }
 
-  const muscleOptions = useMemo(() => getMuscleOptions(), [])
+  function toggleTargetArea(targetArea: string) {
+    setSelectedTargetAreas((prev) =>
+      prev.includes(targetArea) ? prev.filter((a) => a !== targetArea) : [...prev, targetArea],
+    )
+  }
+
+  const muscleOptions = useMemo(() => getMuscleOptions(selectedTargetAreas), [selectedTargetAreas])
+  const targetAreaOptions = useMemo(() => getTargetAreaOptions(), [])
+
+  const activeMuscles = useMemo(
+    () => selectedMuscles.filter((muscle) => muscleOptions.includes(muscle)),
+    [selectedMuscles, muscleOptions],
+  )
 
   const visibleCards = useMemo(
-    () => getCards({ filter: { muscles: selectedMuscles }, sortBy }),
-    [selectedMuscles, sortBy],
+    () => getCards({ filter: { muscles: activeMuscles, targetAreas: selectedTargetAreas }, sortBy }),
+    [activeMuscles, selectedTargetAreas, sortBy],
   )
 
   return (
@@ -74,7 +87,67 @@ export default function Home() {
               <Disclosure as="div" defaultOpen className="border-t border-gray-200 px-4 py-6">
                 <h3 className="-mx-2 -my-3 flow-root">
                   <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
-                    <span className="font-medium text-gray-900">Muscles</span>
+                    <span className="font-medium text-gray-900">Target Area</span>
+                    <span className="ml-6 flex items-center">
+                      <ChevronDownIcon
+                        aria-hidden="true"
+                        className="size-5 rotate-0 transform group-data-open:-rotate-180"
+                      />
+                    </span>
+                  </DisclosureButton>
+                </h3>
+                <DisclosurePanel className="pt-6">
+                  <div className="space-y-6">
+                    {targetAreaOptions.map((targetArea, optionIdx) => (
+                      <div key={targetArea} className="flex gap-3">
+                        <div className="flex h-5 shrink-0 items-center">
+                          <div className="group grid size-4 grid-cols-1">
+                            <input
+                              checked={selectedTargetAreas.includes(targetArea)}
+                              onChange={() => toggleTargetArea(targetArea)}
+                              id={`filter-mobile-target-area-${optionIdx}`}
+                              name="target-area[]"
+                              type="checkbox"
+                              className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                            />
+                            <svg
+                              fill="none"
+                              viewBox="0 0 14 14"
+                              className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25"
+                            >
+                              <path
+                                d="M3 8L6 11L11 3.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="opacity-0 group-has-checked:opacity-100"
+                              />
+                              <path
+                                d="M3 7H11"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="opacity-0 group-has-indeterminate:opacity-100"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <label
+                          htmlFor={`filter-mobile-target-area-${optionIdx}`}
+                          className="ml-3 text-sm text-gray-500"
+                        >
+                          {targetArea}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </DisclosurePanel>
+              </Disclosure>
+
+              <Disclosure as="div" defaultOpen className="border-t border-gray-200 px-4 py-6">
+                <h3 className="-mx-2 -my-3 flow-root">
+                  <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
+                    <span className="font-medium text-gray-900">Target Muscles</span>
                     <span className="ml-6 flex items-center">
                       <ChevronDownIcon
                         aria-hidden="true"
@@ -187,70 +260,137 @@ export default function Home() {
                 Filters
               </button>
 
-              <Popover className="relative hidden sm:inline-block sm:text-left">
-                <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                  <span>Muscles</span>
-                  {selectedMuscles.length > 0 ? (
-                    <span className="ml-1.5 rounded-sm bg-gray-200 px-1.5 py-0.5 text-xs font-semibold text-gray-700 tabular-nums">
-                      {selectedMuscles.length}
-                    </span>
-                  ) : null}
-                  <ChevronDownIcon
-                    aria-hidden="true"
-                    className="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
-                  />
-                </PopoverButton>
+              <div className="hidden items-center gap-4 sm:flex">
+                <Popover className="relative inline-block text-left">
+                  <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                    <span>Target Area</span>
+                    {selectedTargetAreas.length > 0 ? (
+                      <span className="ml-1.5 rounded-sm bg-gray-200 px-1.5 py-0.5 text-xs font-semibold text-gray-700 tabular-nums">
+                        {selectedTargetAreas.length}
+                      </span>
+                    ) : null}
+                    <ChevronDownIcon
+                      aria-hidden="true"
+                      className="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
+                    />
+                  </PopoverButton>
 
-                <PopoverPanel
-                  transition
-                  className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                >
-                  <form className="space-y-4">
-                    {muscleOptions.map((muscle, optionIdx) => (
-                      <div key={muscle} className="flex gap-3">
-                        <div className="flex h-5 shrink-0 items-center">
-                          <div className="group grid size-4 grid-cols-1">
-                            <input
-                              checked={selectedMuscles.includes(muscle)}
-                              onChange={() => toggleMuscle(muscle)}
-                              id={`filter-muscles-${optionIdx}`}
-                              name="muscles[]"
-                              type="checkbox"
-                              className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                            />
-                            <svg
-                              fill="none"
-                              viewBox="0 0 14 14"
-                              className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25"
-                            >
-                              <path
-                                d="M3 8L6 11L11 3.5"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="opacity-0 group-has-checked:opacity-100"
+                  <PopoverPanel
+                    transition
+                    className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                  >
+                    <form className="space-y-4">
+                      {targetAreaOptions.map((targetArea, optionIdx) => (
+                        <div key={targetArea} className="flex gap-3">
+                          <div className="flex h-5 shrink-0 items-center">
+                            <div className="group grid size-4 grid-cols-1">
+                              <input
+                                checked={selectedTargetAreas.includes(targetArea)}
+                                onChange={() => toggleTargetArea(targetArea)}
+                                id={`filter-target-area-${optionIdx}`}
+                                name="target-area[]"
+                                type="checkbox"
+                                className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
                               />
-                              <path
-                                d="M3 7H11"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="opacity-0 group-has-indeterminate:opacity-100"
-                              />
-                            </svg>
+                              <svg
+                                fill="none"
+                                viewBox="0 0 14 14"
+                                className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25"
+                              >
+                                <path
+                                  d="M3 8L6 11L11 3.5"
+                                  strokeWidth={2}
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="opacity-0 group-has-checked:opacity-100"
+                                />
+                                <path
+                                  d="M3 7H11"
+                                  strokeWidth={2}
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="opacity-0 group-has-indeterminate:opacity-100"
+                                />
+                              </svg>
+                            </div>
                           </div>
+                          <label
+                            htmlFor={`filter-target-area-${optionIdx}`}
+                            className="pr-6 text-sm font-medium whitespace-nowrap text-gray-900"
+                          >
+                            {targetArea}
+                          </label>
                         </div>
-                        <label
-                          htmlFor={`filter-muscles-${optionIdx}`}
-                          className="pr-6 text-sm font-medium whitespace-nowrap text-gray-900"
-                        >
-                          {muscle}
-                        </label>
-                      </div>
-                    ))}
-                  </form>
-                </PopoverPanel>
-              </Popover>
+                      ))}
+                    </form>
+                  </PopoverPanel>
+                </Popover>
+
+                <Popover className="relative inline-block text-left">
+                  <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                    <span>Target Muscles</span>
+                    {activeMuscles.length > 0 ? (
+                      <span className="ml-1.5 rounded-sm bg-gray-200 px-1.5 py-0.5 text-xs font-semibold text-gray-700 tabular-nums">
+                        {activeMuscles.length}
+                      </span>
+                    ) : null}
+                    <ChevronDownIcon
+                      aria-hidden="true"
+                      className="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
+                    />
+                  </PopoverButton>
+
+                  <PopoverPanel
+                    transition
+                    className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                  >
+                    <form className="space-y-4">
+                      {muscleOptions.map((muscle, optionIdx) => (
+                        <div key={muscle} className="flex gap-3">
+                          <div className="flex h-5 shrink-0 items-center">
+                            <div className="group grid size-4 grid-cols-1">
+                              <input
+                                checked={selectedMuscles.includes(muscle)}
+                                onChange={() => toggleMuscle(muscle)}
+                                id={`filter-muscles-${optionIdx}`}
+                                name="muscles[]"
+                                type="checkbox"
+                                className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                              />
+                              <svg
+                                fill="none"
+                                viewBox="0 0 14 14"
+                                className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25"
+                              >
+                                <path
+                                  d="M3 8L6 11L11 3.5"
+                                  strokeWidth={2}
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="opacity-0 group-has-checked:opacity-100"
+                                />
+                                <path
+                                  d="M3 7H11"
+                                  strokeWidth={2}
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="opacity-0 group-has-indeterminate:opacity-100"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                          <label
+                            htmlFor={`filter-muscles-${optionIdx}`}
+                            className="pr-6 text-sm font-medium whitespace-nowrap text-gray-900"
+                          >
+                            {muscle}
+                          </label>
+                        </div>
+                      ))}
+                    </form>
+                  </PopoverPanel>
+                </Popover>
+              </div>
             </div>
           </section>
 
