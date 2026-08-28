@@ -20,14 +20,13 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { sortOptions } from '@/data/sort-options'
-import type { SortValue } from '@/data/sort-options'
-import { muscleOptions } from '@/data/filters'
-import { cards } from '@/data/cards'
+import { getCards, getMuscleOptions } from '@/services/cards-service'
+import type { CardSortBy } from '@/services/cards-service'
 
 export default function Home() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [selectedMuscles, setSelectedMuscles] = useState<string[]>([])
-  const [sortBy, setSortBy] = useState<SortValue>('main')
+  const [sortBy, setSortBy] = useState<CardSortBy>('main')
 
   function toggleMuscle(muscle: string) {
     setSelectedMuscles((prev) =>
@@ -35,17 +34,12 @@ export default function Home() {
     )
   }
 
-  const visibleCards = useMemo(() => {
-    const filtered =
-      selectedMuscles.length === 0
-        ? cards
-        : cards.filter((card) =>
-            [...card.muscles, ...card.muscles2].some((muscle) => selectedMuscles.includes(muscle)),
-          )
+  const muscleOptions = useMemo(() => getMuscleOptions(), [])
 
-    const sortKey = sortBy === 'main' ? 'muscles' : 'muscles2'
-    return [...filtered].sort((a, b) => a[sortKey].join(', ').localeCompare(b[sortKey].join(', ')))
-  }, [selectedMuscles, sortBy])
+  const visibleCards = useMemo(
+    () => getCards({ filter: { muscles: selectedMuscles }, sortBy }),
+    [selectedMuscles, sortBy],
+  )
 
   return (
     <div className="bg-gray-50">

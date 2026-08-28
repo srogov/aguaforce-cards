@@ -1,8 +1,8 @@
-export type SortValue = 'main' | 'supporting'
+import type { CardSortBy } from '@/services/cards-service'
 
 export type SortOption = {
   name: string
-  value: SortValue
+  value: CardSortBy
 }
 
 export const sortOptions: SortOption[] = [
