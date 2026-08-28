@@ -1,7 +1,9 @@
 export type Cards = {
-  id: number
+  id: string
   name: string
+  slug: string
   description: string
+  steps: string
   muscles: string[]
   muscles2: string[]
   imageSrc: string
@@ -10,13 +12,16 @@ export type Cards = {
 
 export const cards: Cards[] = [
   {
-    id: 1,
+    id: 'card-1',
     name: 'Deadlift',
+    slug: 'deadlift',
+    description:
+      'Builds total-body strength through a hip-hinge pattern, targeting the glutes, hamstrings, and lower back while reinforcing safe lifting mechanics.',
     muscles: ['Glutes', 'Lower Back'],
     muscles2: ['Abs', 'Calves', 'Hamstrings', 'Quadriceps'],
     imageSrc: '/images/cards/3.png',
     imageAlt: 'Woman performing a deadlift with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand with feet hip-width apart, an AguaForce weight on the floor between your feet
 - Hinge at the hips and bend your knees to grip the handle, keeping your back flat and chest up
@@ -29,13 +34,16 @@ export const cards: Cards[] = [
 - Brace your core before you lift to protect your lower back`,
   },
   {
-    id: 2,
+    id: 'card-2',
     name: 'Romanian Deadlift',
+    slug: 'romanian-deadlift',
+    description:
+      'Targets the hamstrings and glutes through a controlled hip hinge, improving posterior chain strength and flexibility.',
     muscles: ['Hamstrings'],
     muscles2: ['Abs', 'Calves', 'Glutes', 'Lower Back'],
     imageSrc: '/images/cards/4.png',
     imageAlt: 'Woman performing a Romanian deadlift with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight with both hands in front of your thighs
 - With a slight bend in your knees, push your hips back and lower the weight along your legs
@@ -48,13 +56,16 @@ export const cards: Cards[] = [
 - Avoid rounding your lower back as you hinge`,
   },
   {
-    id: 3,
+    id: 'card-3',
     name: 'Straight Leg Deadlift',
+    slug: 'straight-leg-deadlift',
+    description:
+      'Emphasizes hamstring flexibility and posterior chain strength with a near-straight-leg hip hinge.',
     muscles: ['Glutes', 'Lower Back', 'Hamstrings'],
     muscles2: ['Adductors', 'Trapezius', 'Forearm Flexors'],
     imageSrc: '/images/cards/5.png',
     imageAlt: 'Woman performing a straight leg deadlift with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand with feet hip-width apart holding an AguaForce weight in front of your thighs
 - Keeping your legs nearly straight, hinge at the hips and lower the weight toward the floor
@@ -67,13 +78,16 @@ export const cards: Cards[] = [
 - Move slowly to maintain control and protect your lower back`,
   },
   {
-    id: 4,
+    id: 'card-4',
     name: 'Single Leg Romanian Deadlift',
+    slug: 'single-leg-romanian-deadlift',
+    description:
+      'Builds unilateral hamstring and glute strength while challenging balance and hip stability.',
     muscles: ['Hamstrings', 'Glutes'],
     muscles2: ['Abs', 'Calves', 'Lower Back'],
     imageSrc: '/images/cards/6.png',
     imageAlt: 'Woman performing a single leg Romanian deadlift with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand on one leg holding an AguaForce weight in the opposite hand
 - Hinge forward at the hips, extending your free leg straight behind you for balance
@@ -86,13 +100,16 @@ export const cards: Cards[] = [
 - Move slowly and use a wall or chair for balance if needed`,
   },
   {
-    id: 5,
+    id: 'card-5',
     name: 'Swing',
+    slug: 'swing',
+    description:
+      'Develops explosive hip power and cardiovascular conditioning by driving the weight up with an aggressive hip hinge.',
     muscles: ['Glutes', 'Quadriceps', 'Shoulders'],
     muscles2: ['Abs', 'Calves', 'Hamstrings', 'Lower Back'],
     imageSrc: '/images/cards/7.png',
     imageAlt: 'Woman performing a swing with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand with feet shoulder-width apart, holding an AguaForce weight with both hands
 - Hinge at the hips and swing the weight back between your legs
@@ -105,13 +122,16 @@ export const cards: Cards[] = [
 - Keep your core braced and back flat throughout the swing`,
   },
   {
-    id: 6,
+    id: 'card-6',
     name: 'Front Squat',
+    slug: 'front-squat',
+    description:
+      'Strengthens the glutes and quadriceps while building core stability from holding the weight at the chest.',
     muscles: ['Glutes', 'Quadriceps'],
     muscles2: ['Abs', 'Calves', 'Hamstrings'],
     imageSrc: '/images/cards/8.png',
     imageAlt: 'Woman performing a front squat with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Hold an AguaForce weight close to your chest with both hands, elbows pointing forward
 - Stand with feet shoulder-width apart, toes slightly turned out
@@ -124,13 +144,16 @@ export const cards: Cards[] = [
 - Squat as low as your mobility comfortably allows`,
   },
   {
-    id: 7,
+    id: 'card-7',
     name: 'Sumo Squat',
+    slug: 'sumo-squat',
+    description:
+      'Targets the glutes and inner thighs with a wide-stance squat that builds lower-body strength and hip mobility.',
     muscles: ['Glutes', 'Quadriceps'],
     muscles2: ['Abs', 'Calves', 'Hamstrings'],
     imageSrc: '/images/cards/9.png',
     imageAlt: 'Woman performing a sumo squat with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand with feet wider than shoulder-width, toes turned out, holding an AguaForce weight with both hands in front of you
 - Bend your knees and hips to lower straight down, keeping the weight between your legs
@@ -143,13 +166,16 @@ export const cards: Cards[] = [
 - Keep your chest up and back straight throughout`,
   },
   {
-    id: 8,
+    id: 'card-8',
     name: 'Split Squat',
+    slug: 'split-squat',
+    description:
+      'Builds unilateral leg strength and stability in the quadriceps, hamstrings, and calves through a staggered stance.',
     muscles: ['Calves', 'Hamstrings', 'Quadriceps'],
     muscles2: ['Abs'],
     imageSrc: '/images/cards/10.png',
     imageAlt: 'Woman performing a split squat with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Hold an AguaForce weight close to your chest and step one foot forward into a staggered stance
 - Lower your body by bending both knees until your back knee nearly touches the floor
@@ -162,13 +188,16 @@ export const cards: Cards[] = [
 - Take a long enough stride so your front knee stays over your ankle`,
   },
   {
-    id: 9,
+    id: 'card-9',
     name: 'Forward Lunges',
+    slug: 'forward-lunges',
+    description:
+      'Develops lower-body strength and balance by targeting the glutes and quadriceps through alternating forward steps.',
     muscles: ['Glutes', 'Quadriceps'],
     muscles2: ['Hamstrings', 'Abs', 'Calves'],
     imageSrc: '/images/cards/11.png',
     imageAlt: 'Woman performing forward lunges with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight in each hand at your sides
 - Step forward with one leg and lower your hips until both knees are bent around 90 degrees
@@ -181,13 +210,16 @@ export const cards: Cards[] = [
 - Keep your core engaged to stay balanced`,
   },
   {
-    id: 10,
+    id: 'card-10',
     name: 'Kneeling Squat',
+    slug: 'kneeling-squat',
+    description:
+      'Isolates the glutes with a controlled kneeling hip-hinge motion, reducing knee strain while building hip strength.',
     muscles: ['Glutes'],
     muscles2: ['Hamstrings', 'Abs', 'Quadriceps'],
     imageSrc: '/images/cards/12.png',
     imageAlt: 'Woman performing a kneeling squat with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Kneel upright on a mat with knees hip-width apart, holding an AguaForce weight close to your chest
 - Keeping your torso tall, sit your hips back toward your heels
@@ -200,13 +232,16 @@ export const cards: Cards[] = [
 - Use a folded towel or mat under your knees for comfort`,
   },
   {
-    id: 11,
+    id: 'card-11',
     name: 'Glute Bridge',
+    slug: 'glute-bridge',
+    description:
+      'Strengthens the glutes and core through hip extension, also engaging the hamstrings and lower back for hip stability.',
     muscles: ['Glutes'],
     muscles2: ['Abs', 'Lower Back', 'Hamstrings'],
     imageSrc: '/images/cards/14.png',
     imageAlt: 'Woman performing a glute bridge with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Lie on your back with knees bent and feet flat on the floor, holding an AguaForce weight over your hips
 - Press through your heels and lift your hips toward the ceiling
@@ -219,13 +254,16 @@ export const cards: Cards[] = [
 - Avoid overarching your lower back at the top of the movement`,
   },
   {
-    id: 12,
+    id: 'card-12',
     name: 'Overhead Crunch',
+    slug: 'overhead-crunch',
+    description:
+      'Builds core and ab strength through a crunch pattern made more challenging by holding the weight overhead.',
     muscles: ['Abs', 'Obliques'],
     muscles2: ['Glutes', 'Quadriceps', 'Iliopsoas'],
     imageSrc: '/images/cards/15.png',
     imageAlt: 'Woman performing an overhead crunch with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Lie on your back with knees bent, holding an AguaForce weight overhead with both arms extended
 - Keep your arms extended as you crunch up, bringing the weight forward over your chest
@@ -238,13 +276,16 @@ export const cards: Cards[] = [
 - Exhale as you crunch up to fully engage your abs`,
   },
   {
-    id: 13,
+    id: 'card-13',
     name: 'Frog Crunch',
+    slug: 'frog-crunch',
+    description:
+      'Targets the abs with a crunch variation that opens the hips, adding a light stretch through the inner thighs.',
     muscles: ['Abs'],
     muscles2: ['Quads', 'Hip Flexors'],
     imageSrc: '/images/cards/16.png',
     imageAlt: 'Woman performing a frog crunch with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Lie on your back holding an AguaForce weight against your chest, soles of your feet together and knees dropped open
 - Curl your shoulders and upper back off the floor, contracting your abs
@@ -257,13 +298,16 @@ export const cards: Cards[] = [
 - Focus on lifting with your abs rather than momentum`,
   },
   {
-    id: 14,
+    id: 'card-14',
     name: 'Russian Twist',
+    slug: 'russian-twist',
+    description:
+      'Builds rotational core strength, targeting the abs and obliques through controlled side-to-side twisting.',
     muscles: ['Abs', 'Obliques'],
     muscles2: ['Biceps', 'Forearms', 'Lower Back'],
     imageSrc: '/images/cards/17.png',
     imageAlt: 'Woman performing a Russian twist with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Sit on the floor with knees bent and lean back slightly, holding an AguaForce weight with both hands at your chest
 - Lift your feet slightly off the floor for a greater challenge, or keep them planted for stability
@@ -276,13 +320,16 @@ export const cards: Cards[] = [
 - Move through your torso, not just your arms`,
   },
   {
-    id: 15,
+    id: 'card-15',
     name: 'Side Bend',
+    slug: 'side-bend',
+    description:
+      'Isolates the obliques through a controlled lateral bend, building core strength and stability on each side.',
     muscles: ['Obliques'],
     muscles2: ['Abs'],
     imageSrc: '/images/cards/18.png',
     imageAlt: 'Woman performing a side bend with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight in one hand at your side
 - Keeping your hips facing forward, bend directly sideways toward the weight
@@ -295,13 +342,16 @@ export const cards: Cards[] = [
 - Move slowly and keep the motion strictly side-to-side`,
   },
   {
-    id: 16,
+    id: 'card-16',
     name: 'Bent Over Row',
+    slug: 'bent-over-row',
+    description:
+      'Strengthens the back and biceps through a horizontal pulling motion while reinforcing a flat-back hip hinge.',
     muscles: ['Back'],
     muscles2: ['Abs', 'Shoulders', 'Arms'],
     imageSrc: '/images/cards/19.png',
     imageAlt: 'Woman performing a bent over row with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand with feet hip-width apart and hinge forward at the hips, holding an AguaForce weight with both hands, back flat
 - Let the weight hang below your chest with arms extended
@@ -314,13 +364,16 @@ export const cards: Cards[] = [
 - Squeeze your shoulder blades together at the top of each row`,
   },
   {
-    id: 17,
+    id: 'card-17',
     name: 'Bent Over Reverse Fly',
+    slug: 'bent-over-reverse-fly',
+    description:
+      'Targets the rear shoulders and upper back, improving posture through a controlled arm raise from a hip hinge.',
     muscles: ['Shoulders'],
     muscles2: ['Upper Back', 'Triceps'],
     imageSrc: '/images/cards/20.png',
     imageAlt: 'Woman performing a bent over reverse fly with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Hinge forward at the hips with a flat back, holding an AguaForce weight in each hand below your shoulders
 - With a slight bend in your elbows, raise both weights out to your sides until arms are level with your torso
@@ -333,13 +386,16 @@ export const cards: Cards[] = [
 - Keep your neck relaxed and gaze toward the floor`,
   },
   {
-    id: 18,
+    id: 'card-18',
     name: 'Gorilla Row',
+    slug: 'gorilla-row',
+    description:
+      'Builds back and shoulder strength through alternating rows from a deadlift-like stance, challenging core stability.',
     muscles: ['Middle Back', 'Upper Back', 'Lats', 'Shoulders'],
     muscles2: ['Abs', 'Biceps', 'Triceps', 'Forearms', 'Glutes'],
     imageSrc: '/images/cards/21.png',
     imageAlt: 'Woman performing a gorilla row with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand with feet wide, hinge forward and place two AguaForce weights on the floor between your feet
 - Grip one handle and row it up toward your ribs while the other arm stays extended, supporting your weight
@@ -352,13 +408,16 @@ export const cards: Cards[] = [
 - Drive your elbow up and back on each row for full lat engagement`,
   },
   {
-    id: 19,
+    id: 'card-19',
     name: 'Bent Over Kickback',
+    slug: 'bent-over-kickback',
+    description:
+      'Isolates the triceps through a controlled arm extension from a hinged position, building arm strength and stability.',
     muscles: ['Triceps'],
     muscles2: ['Forearms', 'Abs', 'Lower Back'],
     imageSrc: '/images/cards/22.png',
     imageAlt: 'Woman performing a bent over kickback with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Hinge forward at the hips with a flat back, holding an AguaForce weight in one hand with your elbow bent at your side
 - Keeping your upper arm still and close to your body, extend your forearm back until your arm is straight
@@ -371,13 +430,16 @@ export const cards: Cards[] = [
 - Avoid swinging the weight — let your triceps do the work`,
   },
   {
-    id: 20,
+    id: 'card-20',
     name: 'Triceps Kickback',
+    slug: 'triceps-kickback',
+    description:
+      'Isolates the triceps with a bench-supported single-arm extension, building arm strength and stability.',
     muscles: ['Triceps'],
     muscles2: ['Abs', 'Forearms'],
     imageSrc: '/images/cards/24.png',
     imageAlt: 'Woman performing a triceps kickback on a bench with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Kneel on a bench with one hand and knee supporting you, holding an AguaForce weight in your free hand with your elbow bent
 - Keep your upper arm parallel to the floor and still
@@ -390,13 +452,16 @@ export const cards: Cards[] = [
 - Move only at the elbow — keep your upper arm stationary`,
   },
   {
-    id: 21,
+    id: 'card-21',
     name: 'Concentration Curl',
+    slug: 'concentration-curl',
+    description:
+      'Isolates the biceps through a seated, braced curl that minimizes momentum for focused arm strength.',
     muscles: ['Biceps'],
     muscles2: ['Forearms'],
     imageSrc: '/images/cards/25.png',
     imageAlt: 'Woman performing a concentration curl with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Sit on a bench with legs spread and lean forward slightly, bracing your elbow against the inside of your thigh
 - Hold an AguaForce weight in that hand with your arm extended toward the floor
@@ -409,13 +474,16 @@ export const cards: Cards[] = [
 - Avoid swinging your torso to generate momentum`,
   },
   {
-    id: 22,
+    id: 'card-22',
     name: 'Alternate Biceps Curl',
+    slug: 'alternate-biceps-curl',
+    description:
+      'Builds bicep strength through alternating curls, keeping each arm working independently with control.',
     muscles: ['Biceps'],
     muscles2: ['Forearms'],
     imageSrc: '/images/cards/26.png',
     imageAlt: 'Woman performing alternating biceps curls with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Sit or stand tall holding an AguaForce weight in each hand at your sides, palms facing forward
 - Curl one weight up toward your shoulder, keeping your elbow close to your body
@@ -428,13 +496,16 @@ export const cards: Cards[] = [
 - Avoid using your shoulders or back to swing the weight up`,
   },
   {
-    id: 23,
+    id: 'card-23',
     name: 'Alternate Hammer Curl',
+    slug: 'alternate-hammer-curl',
+    description:
+      'Targets the biceps and forearms with a neutral-grip curl, alternating arms for balanced strength.',
     muscles: ['Biceps'],
     muscles2: ['Forearms'],
     imageSrc: '/images/cards/27.png',
     imageAlt: 'Woman performing alternating hammer curls with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight in each hand at your sides, palms facing your body
 - Curl one weight up toward your shoulder while keeping your wrist neutral, like a hammer grip
@@ -447,13 +518,16 @@ export const cards: Cards[] = [
 - Keep your palms facing inward for the entire movement`,
   },
   {
-    id: 24,
+    id: 'card-24',
     name: 'Reverse Curl',
+    slug: 'reverse-curl',
+    description:
+      'Strengthens the biceps and forearms through an overhand-grip curl that emphasizes grip and forearm engagement.',
     muscles: ['Biceps'],
     muscles2: ['Forearms'],
     imageSrc: '/images/cards/28.png',
     imageAlt: 'Woman performing a reverse curl with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight with both hands, palms facing down toward your body
 - Keeping your elbows close to your sides, curl the weight up toward your chest
@@ -466,13 +540,16 @@ export const cards: Cards[] = [
 - Avoid letting your wrists bend as you curl`,
   },
   {
-    id: 25,
+    id: 'card-25',
     name: 'Overhead Triceps Extension',
+    slug: 'overhead-triceps-extension',
+    description:
+      'Isolates the triceps through an overhead arm extension, building upper-arm strength and shoulder stability.',
     muscles: ['Triceps'],
     muscles2: ['Abs', 'Shoulders'],
     imageSrc: '/images/cards/29.png',
     imageAlt: 'Woman performing an overhead triceps extension with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight with both hands behind your head, elbows bent and pointing up
 - Keeping your upper arms close to your ears and still, extend your arms to press the weight overhead
@@ -485,13 +562,16 @@ export const cards: Cards[] = [
 - Brace your core to avoid arching your lower back`,
   },
   {
-    id: 26,
+    id: 'card-26',
     name: 'Upright Row',
+    slug: 'upright-row',
+    description:
+      'Builds shoulder and upper-back strength by pulling the weights vertically along the body toward shoulder height.',
     muscles: ['Shoulders'],
     muscles2: ['Abs', 'Biceps', 'Forearms', 'Upper Back'],
     imageSrc: '/images/cards/30.png',
     imageAlt: 'Woman performing an upright row with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight in each hand in front of your thighs, palms facing your body
 - Pull both weights straight up along your torso, leading with your elbows
@@ -504,13 +584,16 @@ export const cards: Cards[] = [
 - Avoid shrugging your shoulders toward your ears`,
   },
   {
-    id: 27,
+    id: 'card-27',
     name: 'Armpit Row',
+    slug: 'armpit-row',
+    description:
+      'Targets the lateral shoulders and upper back through a wide-elbow pulling motion toward the armpits.',
     muscles: ['Lateral Deltoid'],
     muscles2: ['Brachialis', 'Brachioradialis', 'Serratus Anterior', 'Biceps'],
     imageSrc: '/images/cards/31.png',
     imageAlt: 'Woman performing an armpit row with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight in each hand at your sides
 - Pull both weights straight up toward your armpits, leading with your elbows out wide
@@ -523,13 +606,16 @@ export const cards: Cards[] = [
 - Keep your torso upright throughout the movement`,
   },
   {
-    id: 28,
+    id: 'card-28',
     name: 'Lateral Raise',
+    slug: 'lateral-raise',
+    description:
+      'Isolates the shoulders through a controlled side raise, building width and stability in the deltoids.',
     muscles: ['Shoulders'],
     muscles2: [],
     imageSrc: '/images/cards/32.png',
     imageAlt: 'Woman performing a lateral raise with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight in each hand at your sides, palms facing your body
 - With a slight bend in your elbows, raise both weights out to the sides until they reach shoulder height
@@ -542,13 +628,16 @@ export const cards: Cards[] = [
 - Lead the movement with your elbows, not your hands`,
   },
   {
-    id: 29,
+    id: 'card-29',
     name: 'Front Raise',
+    slug: 'front-raise',
+    description:
+      'Targets the front shoulders through a controlled forward raise, building shoulder strength and core stability.',
     muscles: ['Abs', 'Shoulders'],
     muscles2: ['Upper Back', 'Lower Traps'],
     imageSrc: '/images/cards/33.png',
     imageAlt: 'Woman performing a front raise with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight with both hands in front of your thighs
 - With arms straight or a slight bend in the elbows, raise the weight forward until it reaches shoulder height
@@ -561,13 +650,16 @@ export const cards: Cards[] = [
 - Avoid using momentum to swing the weight up`,
   },
   {
-    id: 30,
+    id: 'card-30',
     name: 'Alternate Front Raise',
+    slug: 'alternate-front-raise',
+    description:
+      'Builds shoulder strength through alternating front raises, challenging balance and core stability.',
     muscles: ['Shoulders'],
     muscles2: ['Abs'],
     imageSrc: '/images/cards/34.png',
     imageAlt: 'Woman performing alternating front raises with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight in each hand in front of your thighs
 - Raise one weight forward to shoulder height while the other stays at your side
@@ -580,13 +672,16 @@ export const cards: Cards[] = [
 - Keep your core braced to avoid leaning back`,
   },
   {
-    id: 31,
+    id: 'card-31',
     name: 'Halo',
+    slug: 'halo',
+    description:
+      'Improves shoulder mobility and core stability by circling the weight around the head with control.',
     muscles: ['Shoulders'],
     muscles2: ['Triceps', 'Upper Back'],
     imageSrc: '/images/cards/35.png',
     imageAlt: 'Woman performing a halo with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand with feet shoulder-width apart, holding an AguaForce weight with both hands at chest height
 - Circle the weight around your head, passing it behind your head and back to the front
@@ -599,13 +694,16 @@ export const cards: Cards[] = [
 - Move slowly to maintain control and stability`,
   },
   {
-    id: 32,
+    id: 'card-32',
     name: 'Pullover',
+    slug: 'pullover',
+    description:
+      'Strengthens the chest, upper back, and lats through an overhead arm movement performed on a bench.',
     muscles: ['Chest', 'Upper Back', 'Lower Traps'],
     muscles2: ['Abs', 'Shoulders', 'Triceps'],
     imageSrc: '/images/cards/36.png',
     imageAlt: 'Woman performing a pullover on a bench with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Lie with your upper back supported on a bench, hips low, feet planted on the floor
 - Hold an AguaForce weight with both hands straight above your chest
@@ -618,13 +716,16 @@ export const cards: Cards[] = [
 - Move slowly, especially on the way down`,
   },
   {
-    id: 33,
+    id: 'card-33',
     name: 'Svend Press',
+    slug: 'svend-press',
+    description:
+      'Builds chest and tricep strength through a squeeze-and-press motion that emphasizes constant muscle tension.',
     muscles: ['Chest'],
     muscles2: ['Biceps', 'Triceps'],
     imageSrc: '/images/cards/37.png',
     imageAlt: 'Woman performing a Svend press with an AguaForce water weight',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand tall holding an AguaForce weight with both hands flat against your chest, squeezing it between your palms
 - Keeping the squeeze on, press the weight straight out in front of you until your arms are extended
@@ -637,13 +738,16 @@ export const cards: Cards[] = [
 - Keep your elbows up and out rather than dropping down`,
   },
   {
-    id: 34,
+    id: 'card-34',
     name: 'Chest Press',
+    slug: 'chest-press',
+    description:
+      'Strengthens the chest, shoulders, and triceps through a pressing motion performed lying on the floor.',
     muscles: ['Chest'],
     muscles2: ['Abs', 'Shoulders', 'Triceps'],
     imageSrc: '/images/cards/38.png',
     imageAlt: 'Woman performing a chest press on the floor with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Lie on your back with knees bent, holding an AguaForce weight in each hand at chest level, elbows bent
 - Press both weights straight up above your chest until your arms are extended
@@ -656,13 +760,16 @@ export const cards: Cards[] = [
 - Press evenly with both arms to keep the weights level`,
   },
   {
-    id: 35,
+    id: 'card-35',
     name: 'Shoulder Press',
+    slug: 'shoulder-press',
+    description:
+      'Builds shoulder and tricep strength through a seated overhead press, also engaging the core for stability.',
     muscles: ['Shoulders'],
     muscles2: ['Abs', 'Triceps', 'Upper Back'],
     imageSrc: '/images/cards/39.png',
     imageAlt: 'Woman performing a seated shoulder press with AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Sit tall on a bench holding an AguaForce weight in each hand at shoulder height, palms facing forward
 - Press both weights straight overhead until your arms are fully extended
@@ -675,13 +782,16 @@ export const cards: Cards[] = [
 - Press the weights in a straight line rather than out in front`,
   },
   {
-    id: 36,
+    id: 'card-36',
     name: 'Squat with Alternating Wave',
+    slug: 'squat-with-alternating-wave',
+    description:
+      'Combines a squat with alternating arm punches to build lower-body strength and coordination between arms and legs.',
     muscles: ['Abs', 'Shoulders', 'Upper Back'],
     muscles2: ['Biceps', 'Glutes', 'Calves', 'Hamstrings', 'Quadriceps'],
     imageSrc: '/images/cards/40.png',
     imageAlt: 'Woman performing a squat with an alternating wave using AguaForce water weights',
-    description: `### How to perform
+    steps: `### How to perform
 
 - Stand with feet shoulder-width apart holding an AguaForce weight in each hand at shoulder height
 - Lower into a squat while punching one weight forward, extending that arm
