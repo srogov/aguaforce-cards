@@ -1,12 +1,11 @@
+export type SortValue = 'main' | 'supporting'
+
 export type SortOption = {
   name: string
-  href: string
+  value: SortValue
 }
 
 export const sortOptions: SortOption[] = [
-  { name: 'Most Popular', href: '#' },
-  { name: 'Best Rating', href: '#' },
-  { name: 'Newest', href: '#' },
-  { name: 'Price: Low to High', href: '#' },
-  { name: 'Price: High to Low', href: '#' },
+  { name: 'Main Muscles', value: 'main' },
+  { name: 'Supporting Muscles', value: 'supporting' },
 ]

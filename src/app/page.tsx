@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Image from 'next/image'
 import {
   Dialog,
@@ -15,17 +15,37 @@ import {
   MenuItems,
   Popover,
   PopoverButton,
-  PopoverGroup,
   PopoverPanel,
 } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { sortOptions } from '@/data/sort-options'
-import { filters } from '@/data/filters'
+import type { SortValue } from '@/data/sort-options'
+import { muscleOptions } from '@/data/filters'
 import { cards } from '@/data/cards'
 
 export default function Home() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [selectedMuscles, setSelectedMuscles] = useState<string[]>([])
+  const [sortBy, setSortBy] = useState<SortValue>('main')
+
+  function toggleMuscle(muscle: string) {
+    setSelectedMuscles((prev) =>
+      prev.includes(muscle) ? prev.filter((m) => m !== muscle) : [...prev, muscle],
+    )
+  }
+
+  const visibleCards = useMemo(() => {
+    const filtered =
+      selectedMuscles.length === 0
+        ? cards
+        : cards.filter((card) =>
+            [...card.muscles, ...card.muscles2].some((muscle) => selectedMuscles.includes(muscle)),
+          )
+
+    const sortKey = sortBy === 'main' ? 'muscles' : 'muscles2'
+    return [...filtered].sort((a, b) => a[sortKey].join(', ').localeCompare(b[sortKey].join(', ')))
+  }, [selectedMuscles, sortBy])
 
   return (
     <div className="bg-gray-50">
@@ -56,67 +76,62 @@ export default function Home() {
 
             {/* Filters */}
             <form className="mt-4">
-              {filters.map((section) => (
-                <Disclosure key={section.name} as="div" className="border-t border-gray-200 px-4 py-6">
-                  <h3 className="-mx-2 -my-3 flow-root">
-                    <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
-                      <span className="font-medium text-gray-900">{section.name}</span>
-                      <span className="ml-6 flex items-center">
-                        <ChevronDownIcon
-                          aria-hidden="true"
-                          className="size-5 rotate-0 transform group-data-open:-rotate-180"
-                        />
-                      </span>
-                    </DisclosureButton>
-                  </h3>
-                  <DisclosurePanel className="pt-6">
-                    <div className="space-y-6">
-                      {section.options.map((option, optionIdx) => (
-                        <div key={option.value} className="flex gap-3">
-                          <div className="flex h-5 shrink-0 items-center">
-                            <div className="group grid size-4 grid-cols-1">
-                              <input
-                                defaultValue={option.value}
-                                defaultChecked={option.checked}
-                                id={`filter-mobile-${section.id}-${optionIdx}`}
-                                name={`${section.id}[]`}
-                                type="checkbox"
-                                className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+              <Disclosure as="div" defaultOpen className="border-t border-gray-200 px-4 py-6">
+                <h3 className="-mx-2 -my-3 flow-root">
+                  <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
+                    <span className="font-medium text-gray-900">Muscles</span>
+                    <span className="ml-6 flex items-center">
+                      <ChevronDownIcon
+                        aria-hidden="true"
+                        className="size-5 rotate-0 transform group-data-open:-rotate-180"
+                      />
+                    </span>
+                  </DisclosureButton>
+                </h3>
+                <DisclosurePanel className="pt-6">
+                  <div className="space-y-6">
+                    {muscleOptions.map((muscle, optionIdx) => (
+                      <div key={muscle} className="flex gap-3">
+                        <div className="flex h-5 shrink-0 items-center">
+                          <div className="group grid size-4 grid-cols-1">
+                            <input
+                              checked={selectedMuscles.includes(muscle)}
+                              onChange={() => toggleMuscle(muscle)}
+                              id={`filter-mobile-muscles-${optionIdx}`}
+                              name="muscles[]"
+                              type="checkbox"
+                              className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                            />
+                            <svg
+                              fill="none"
+                              viewBox="0 0 14 14"
+                              className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25"
+                            >
+                              <path
+                                d="M3 8L6 11L11 3.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="opacity-0 group-has-checked:opacity-100"
                               />
-                              <svg
-                                fill="none"
-                                viewBox="0 0 14 14"
-                                className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25"
-                              >
-                                <path
-                                  d="M3 8L6 11L11 3.5"
-                                  strokeWidth={2}
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  className="opacity-0 group-has-checked:opacity-100"
-                                />
-                                <path
-                                  d="M3 7H11"
-                                  strokeWidth={2}
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  className="opacity-0 group-has-indeterminate:opacity-100"
-                                />
-                              </svg>
-                            </div>
+                              <path
+                                d="M3 7H11"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="opacity-0 group-has-indeterminate:opacity-100"
+                              />
+                            </svg>
                           </div>
-                          <label
-                            htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                            className="ml-3 text-sm text-gray-500"
-                          >
-                            {option.label}
-                          </label>
                         </div>
-                      ))}
-                    </div>
-                  </DisclosurePanel>
-                </Disclosure>
-              ))}
+                        <label htmlFor={`filter-mobile-muscles-${optionIdx}`} className="ml-3 text-sm text-gray-500">
+                          {muscle}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </DisclosurePanel>
+              </Disclosure>
             </form>
           </DialogPanel>
         </div>
@@ -154,12 +169,15 @@ export default function Home() {
                   <div className="py-1">
                     {sortOptions.map((option) => (
                       <MenuItem key={option.name}>
-                        <a
-                          href={option.href}
-                          className="block px-4 py-2 text-sm font-medium text-gray-900 data-focus:bg-gray-100 data-focus:outline-hidden"
+                        <button
+                          type="button"
+                          onClick={() => setSortBy(option.value)}
+                          className={`block w-full px-4 py-2 text-left text-sm font-medium data-focus:bg-gray-100 data-focus:outline-hidden ${
+                            sortBy === option.value ? 'text-indigo-600' : 'text-gray-900'
+                          }`}
                         >
                           {option.name}
-                        </a>
+                        </button>
                       </MenuItem>
                     ))}
                   </div>
@@ -174,76 +192,70 @@ export default function Home() {
                 Filters
               </button>
 
-              <PopoverGroup className="hidden sm:flex sm:items-baseline sm:space-x-8">
-                {filters.map((section, sectionIdx) => (
-                  <Popover key={section.name} className="relative inline-block text-left">
-                    <div>
-                      <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                        <span>{section.name}</span>
-                        {sectionIdx === 0 ? (
-                          <span className="ml-1.5 rounded-sm bg-gray-200 px-1.5 py-0.5 text-xs font-semibold text-gray-700 tabular-nums">
-                            1
-                          </span>
-                        ) : null}
-                        <ChevronDownIcon
-                          aria-hidden="true"
-                          className="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
-                        />
-                      </PopoverButton>
-                    </div>
+              <Popover className="relative hidden sm:inline-block sm:text-left">
+                <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                  <span>Muscles</span>
+                  {selectedMuscles.length > 0 ? (
+                    <span className="ml-1.5 rounded-sm bg-gray-200 px-1.5 py-0.5 text-xs font-semibold text-gray-700 tabular-nums">
+                      {selectedMuscles.length}
+                    </span>
+                  ) : null}
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
+                  />
+                </PopoverButton>
 
-                    <PopoverPanel
-                      transition
-                      className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                    >
-                      <form className="space-y-4">
-                        {section.options.map((option, optionIdx) => (
-                          <div key={option.value} className="flex gap-3">
-                            <div className="flex h-5 shrink-0 items-center">
-                              <div className="group grid size-4 grid-cols-1">
-                                <input
-                                  defaultValue={option.value}
-                                  defaultChecked={option.checked}
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  type="checkbox"
-                                  className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                                />
-                                <svg
-                                  fill="none"
-                                  viewBox="0 0 14 14"
-                                  className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25"
-                                >
-                                  <path
-                                    d="M3 8L6 11L11 3.5"
-                                    strokeWidth={2}
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="opacity-0 group-has-checked:opacity-100"
-                                  />
-                                  <path
-                                    d="M3 7H11"
-                                    strokeWidth={2}
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    className="opacity-0 group-has-indeterminate:opacity-100"
-                                  />
-                                </svg>
-                              </div>
-                            </div>
-                            <label
-                              htmlFor={`filter-${section.id}-${optionIdx}`}
-                              className="pr-6 text-sm font-medium whitespace-nowrap text-gray-900"
+                <PopoverPanel
+                  transition
+                  className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                >
+                  <form className="space-y-4">
+                    {muscleOptions.map((muscle, optionIdx) => (
+                      <div key={muscle} className="flex gap-3">
+                        <div className="flex h-5 shrink-0 items-center">
+                          <div className="group grid size-4 grid-cols-1">
+                            <input
+                              checked={selectedMuscles.includes(muscle)}
+                              onChange={() => toggleMuscle(muscle)}
+                              id={`filter-muscles-${optionIdx}`}
+                              name="muscles[]"
+                              type="checkbox"
+                              className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                            />
+                            <svg
+                              fill="none"
+                              viewBox="0 0 14 14"
+                              className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25"
                             >
-                              {option.label}
-                            </label>
+                              <path
+                                d="M3 8L6 11L11 3.5"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="opacity-0 group-has-checked:opacity-100"
+                              />
+                              <path
+                                d="M3 7H11"
+                                strokeWidth={2}
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="opacity-0 group-has-indeterminate:opacity-100"
+                              />
+                            </svg>
                           </div>
-                        ))}
-                      </form>
-                    </PopoverPanel>
-                  </Popover>
-                ))}
-              </PopoverGroup>
+                        </div>
+                        <label
+                          htmlFor={`filter-muscles-${optionIdx}`}
+                          className="pr-6 text-sm font-medium whitespace-nowrap text-gray-900"
+                        >
+                          {muscle}
+                        </label>
+                      </div>
+                    ))}
+                  </form>
+                </PopoverPanel>
+              </Popover>
             </div>
           </section>
 
@@ -254,7 +266,7 @@ export default function Home() {
             </h2>
 
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-              {cards.map((card) => (
+              {visibleCards.map((card) => (
                 <div key={card.id} className="group">
                   <div className="overflow-hidden rounded-lg bg-gray-100 shadow-sm">
                     <Image
