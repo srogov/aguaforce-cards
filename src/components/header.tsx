@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useSyncExternalStore } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Dialog, DialogBackdrop, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
@@ -20,7 +20,18 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const targetAreaOptions = getTargetAreaOptions()
   const likedCount = useSyncExternalStore(subscribeToLikedCardIds, getLikedCount, getServerLikedCount)
-  const highlighted = likedCount > 1
+  const highlighted = likedCount > 0
+  const previousLikedCount = useRef(likedCount)
+  const [countAnimation, setCountAnimation] = useState<'in' | 'out' | null>(null)
+
+  useEffect(() => {
+    if (likedCount > previousLikedCount.current) {
+      setCountAnimation('in')
+    } else if (likedCount < previousLikedCount.current) {
+      setCountAnimation('out')
+    }
+    previousLikedCount.current = likedCount
+  }, [likedCount])
 
   return (
     <div>
@@ -230,10 +241,19 @@ export default function Header() {
                           className="size-6 shrink-0 text-gray-400 group-hover:text-gray-500"
                         />
                       )}
-                      <span
-                        className={`ml-1 text-sm font-medium ${highlighted ? 'text-red-500' : 'text-gray-700 group-hover:text-gray-800'}`}
-                      >
-                        {likedCount}
+                      <span className="ml-1 inline-flex h-5 items-center overflow-hidden">
+                        <span
+                          key={likedCount}
+                          className={`inline-block text-sm font-medium ${highlighted ? 'text-red-500' : 'text-gray-700 group-hover:text-gray-800'} ${
+                            countAnimation === 'in'
+                              ? 'animate-[like-count-in_200ms_ease-out]'
+                              : countAnimation === 'out'
+                                ? 'animate-[like-count-out_200ms_ease-out]'
+                                : ''
+                          }`}
+                        >
+                          {likedCount}
+                        </span>
                       </span>
                       <span className="sr-only">items in wishlist, view favorites</span>
                     </a>

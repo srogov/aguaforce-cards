@@ -102,7 +102,7 @@ export default async function CardPage({
               </div>
             </div>
 
-            <div className="mt-10 border-t border-gray-200 pt-10">
+            <div className="mt-10">
               <h3 className="text-sm font-medium text-gray-900">Supporting Muscles</h3>
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300">
