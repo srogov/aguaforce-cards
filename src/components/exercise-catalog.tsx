@@ -18,6 +18,7 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { RemovableBadge } from '@/components/badge'
+import { LikeIconButton } from '@/components/like-icon-button'
 import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
 
 const TARGET_AREAS_PARAM = 'targetAreas'
@@ -430,7 +431,8 @@ export function ExerciseCatalog() {
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
               {visibleCards.map((card) => (
                 <Link key={card.id} href={`/${card.id}/${card.slug}`} className="group">
-                  <div className="overflow-hidden rounded-lg bg-gray-100 shadow-sm">
+                  <div className="relative overflow-hidden rounded-lg bg-gray-100 shadow-sm">
+                    <LikeIconButton cardId={card.id} />
                     <Image
                       alt={card.imageAlt}
                       src={card.imageSrc}
