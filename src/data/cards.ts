@@ -12,7 +12,7 @@ export type Cards = {
 
 export const cards: Cards[] = [
   {
-    id: 'card-1',
+    id: 'exercise-1',
     name: 'Deadlift',
     slug: 'deadlift',
     description:
@@ -34,7 +34,7 @@ export const cards: Cards[] = [
 - Brace your core before you lift to protect your lower back`,
   },
   {
-    id: 'card-2',
+    id: 'exercise-2',
     name: 'Romanian Deadlift',
     slug: 'romanian-deadlift',
     description:
@@ -56,7 +56,7 @@ export const cards: Cards[] = [
 - Avoid rounding your lower back as you hinge`,
   },
   {
-    id: 'card-3',
+    id: 'exercise-3',
     name: 'Straight Leg Deadlift',
     slug: 'straight-leg-deadlift',
     description:
@@ -78,7 +78,7 @@ export const cards: Cards[] = [
 - Move slowly to maintain control and protect your lower back`,
   },
   {
-    id: 'card-4',
+    id: 'exercise-4',
     name: 'Single Leg Romanian Deadlift',
     slug: 'single-leg-romanian-deadlift',
     description:
@@ -100,7 +100,7 @@ export const cards: Cards[] = [
 - Move slowly and use a wall or chair for balance if needed`,
   },
   {
-    id: 'card-5',
+    id: 'exercise-5',
     name: 'Swing',
     slug: 'swing',
     description:
@@ -122,7 +122,7 @@ export const cards: Cards[] = [
 - Keep your core braced and back flat throughout the swing`,
   },
   {
-    id: 'card-6',
+    id: 'exercise-6',
     name: 'Front Squat',
     slug: 'front-squat',
     description:
@@ -144,7 +144,7 @@ export const cards: Cards[] = [
 - Squat as low as your mobility comfortably allows`,
   },
   {
-    id: 'card-7',
+    id: 'exercise-7',
     name: 'Sumo Squat',
     slug: 'sumo-squat',
     description:
@@ -166,7 +166,7 @@ export const cards: Cards[] = [
 - Keep your chest up and back straight throughout`,
   },
   {
-    id: 'card-8',
+    id: 'exercise-8',
     name: 'Split Squat',
     slug: 'split-squat',
     description:
@@ -188,7 +188,7 @@ export const cards: Cards[] = [
 - Take a long enough stride so your front knee stays over your ankle`,
   },
   {
-    id: 'card-9',
+    id: 'exercise-9',
     name: 'Forward Lunges',
     slug: 'forward-lunges',
     description:
@@ -210,7 +210,7 @@ export const cards: Cards[] = [
 - Keep your core engaged to stay balanced`,
   },
   {
-    id: 'card-10',
+    id: 'exercise-10',
     name: 'Kneeling Squat',
     slug: 'kneeling-squat',
     description:
@@ -232,7 +232,7 @@ export const cards: Cards[] = [
 - Use a folded towel or mat under your knees for comfort`,
   },
   {
-    id: 'card-11',
+    id: 'exercise-11',
     name: 'Glute Bridge',
     slug: 'glute-bridge',
     description:
@@ -254,7 +254,7 @@ export const cards: Cards[] = [
 - Avoid overarching your lower back at the top of the movement`,
   },
   {
-    id: 'card-12',
+    id: 'exercise-12',
     name: 'Overhead Crunch',
     slug: 'overhead-crunch',
     description:
@@ -276,7 +276,7 @@ export const cards: Cards[] = [
 - Exhale as you crunch up to fully engage your abs`,
   },
   {
-    id: 'card-13',
+    id: 'exercise-13',
     name: 'Frog Crunch',
     slug: 'frog-crunch',
     description:
@@ -298,7 +298,7 @@ export const cards: Cards[] = [
 - Focus on lifting with your abs rather than momentum`,
   },
   {
-    id: 'card-14',
+    id: 'exercise-14',
     name: 'Russian Twist',
     slug: 'russian-twist',
     description:
@@ -320,7 +320,7 @@ export const cards: Cards[] = [
 - Move through your torso, not just your arms`,
   },
   {
-    id: 'card-15',
+    id: 'exercise-15',
     name: 'Side Bend',
     slug: 'side-bend',
     description:
@@ -342,7 +342,7 @@ export const cards: Cards[] = [
 - Move slowly and keep the motion strictly side-to-side`,
   },
   {
-    id: 'card-16',
+    id: 'exercise-16',
     name: 'Bent Over Row',
     slug: 'bent-over-row',
     description:
@@ -364,7 +364,7 @@ export const cards: Cards[] = [
 - Squeeze your shoulder blades together at the top of each row`,
   },
   {
-    id: 'card-17',
+    id: 'exercise-17',
     name: 'Bent Over Reverse Fly',
     slug: 'bent-over-reverse-fly',
     description:
@@ -386,7 +386,7 @@ export const cards: Cards[] = [
 - Keep your neck relaxed and gaze toward the floor`,
   },
   {
-    id: 'card-18',
+    id: 'exercise-18',
     name: 'Gorilla Row',
     slug: 'gorilla-row',
     description:
@@ -408,7 +408,7 @@ export const cards: Cards[] = [
 - Drive your elbow up and back on each row for full lat engagement`,
   },
   {
-    id: 'card-19',
+    id: 'exercise-19',
     name: 'Bent Over Kickback',
     slug: 'bent-over-kickback',
     description:
@@ -430,7 +430,7 @@ export const cards: Cards[] = [
 - Avoid swinging the weight — let your triceps do the work`,
   },
   {
-    id: 'card-20',
+    id: 'exercise-20',
     name: 'Triceps Kickback',
     slug: 'triceps-kickback',
     description:
@@ -452,7 +452,7 @@ export const cards: Cards[] = [
 - Move only at the elbow — keep your upper arm stationary`,
   },
   {
-    id: 'card-21',
+    id: 'exercise-21',
     name: 'Concentration Curl',
     slug: 'concentration-curl',
     description:
@@ -474,7 +474,7 @@ export const cards: Cards[] = [
 - Avoid swinging your torso to generate momentum`,
   },
   {
-    id: 'card-22',
+    id: 'exercise-22',
     name: 'Alternate Biceps Curl',
     slug: 'alternate-biceps-curl',
     description:
@@ -496,7 +496,7 @@ export const cards: Cards[] = [
 - Avoid using your shoulders or back to swing the weight up`,
   },
   {
-    id: 'card-23',
+    id: 'exercise-23',
     name: 'Alternate Hammer Curl',
     slug: 'alternate-hammer-curl',
     description:
@@ -518,7 +518,7 @@ export const cards: Cards[] = [
 - Keep your palms facing inward for the entire movement`,
   },
   {
-    id: 'card-24',
+    id: 'exercise-24',
     name: 'Reverse Curl',
     slug: 'reverse-curl',
     description:
@@ -540,7 +540,7 @@ export const cards: Cards[] = [
 - Avoid letting your wrists bend as you curl`,
   },
   {
-    id: 'card-25',
+    id: 'exercise-25',
     name: 'Overhead Triceps Extension',
     slug: 'overhead-triceps-extension',
     description:
@@ -562,7 +562,7 @@ export const cards: Cards[] = [
 - Brace your core to avoid arching your lower back`,
   },
   {
-    id: 'card-26',
+    id: 'exercise-26',
     name: 'Upright Row',
     slug: 'upright-row',
     description:
@@ -584,7 +584,7 @@ export const cards: Cards[] = [
 - Avoid shrugging your shoulders toward your ears`,
   },
   {
-    id: 'card-27',
+    id: 'exercise-27',
     name: 'Armpit Row',
     slug: 'armpit-row',
     description:
@@ -606,7 +606,7 @@ export const cards: Cards[] = [
 - Keep your torso upright throughout the movement`,
   },
   {
-    id: 'card-28',
+    id: 'exercise-28',
     name: 'Lateral Raise',
     slug: 'lateral-raise',
     description:
@@ -628,7 +628,7 @@ export const cards: Cards[] = [
 - Lead the movement with your elbows, not your hands`,
   },
   {
-    id: 'card-29',
+    id: 'exercise-29',
     name: 'Front Raise',
     slug: 'front-raise',
     description:
@@ -650,7 +650,7 @@ export const cards: Cards[] = [
 - Avoid using momentum to swing the weight up`,
   },
   {
-    id: 'card-30',
+    id: 'exercise-30',
     name: 'Alternate Front Raise',
     slug: 'alternate-front-raise',
     description:
@@ -672,7 +672,7 @@ export const cards: Cards[] = [
 - Keep your core braced to avoid leaning back`,
   },
   {
-    id: 'card-31',
+    id: 'exercise-31',
     name: 'Halo',
     slug: 'halo',
     description:
@@ -694,7 +694,7 @@ export const cards: Cards[] = [
 - Move slowly to maintain control and stability`,
   },
   {
-    id: 'card-32',
+    id: 'exercise-32',
     name: 'Pullover',
     slug: 'pullover',
     description:
@@ -716,7 +716,7 @@ export const cards: Cards[] = [
 - Move slowly, especially on the way down`,
   },
   {
-    id: 'card-33',
+    id: 'exercise-33',
     name: 'Svend Press',
     slug: 'svend-press',
     description:
@@ -738,7 +738,7 @@ export const cards: Cards[] = [
 - Keep your elbows up and out rather than dropping down`,
   },
   {
-    id: 'card-34',
+    id: 'exercise-34',
     name: 'Chest Press',
     slug: 'chest-press',
     description:
@@ -760,7 +760,7 @@ export const cards: Cards[] = [
 - Press evenly with both arms to keep the weights level`,
   },
   {
-    id: 'card-35',
+    id: 'exercise-35',
     name: 'Shoulder Press',
     slug: 'shoulder-press',
     description:
@@ -782,7 +782,7 @@ export const cards: Cards[] = [
 - Press the weights in a straight line rather than out in front`,
   },
   {
-    id: 'card-36',
+    id: 'exercise-36',
     name: 'Squat with Alternating Wave',
     slug: 'squat-with-alternating-wave',
     description:
