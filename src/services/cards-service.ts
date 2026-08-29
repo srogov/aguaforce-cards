@@ -3,8 +3,6 @@ import type { Cards } from '@/data/cards'
 
 export type { Cards }
 
-export type CardSortBy = 'main' | 'supporting'
-
 export type CardFilter = {
   muscles?: string[]
   targetAreas?: string[]
@@ -12,7 +10,6 @@ export type CardFilter = {
 
 export type GetCardsOptions = {
   filter?: CardFilter
-  sortBy?: CardSortBy
 }
 
 const TARGET_AREAS = ['Arms', 'Back', 'Chest', 'Core/Abs', 'Glutes/Booty', 'Legs', 'Shoulders'] as const
@@ -71,15 +68,13 @@ function matchesFilter(card: Cards, filter?: CardFilter): boolean {
   return true
 }
 
-function sortCards(list: Cards[], sortBy?: CardSortBy): Cards[] {
-  if (!sortBy) return list
-  const sortKey = sortBy === 'main' ? 'muscles' : 'muscles2'
-  return [...list].sort((a, b) => a[sortKey].join(', ').localeCompare(b[sortKey].join(', ')))
+function sortCardsById(list: Cards[]): Cards[] {
+  return [...list].sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }))
 }
 
 export function getCards(options: GetCardsOptions = {}): Cards[] {
   const filtered = cards.filter((card) => matchesFilter(card, options.filter))
-  return sortCards(filtered, options.sortBy)
+  return sortCardsById(filtered)
 }
 
 export function getCardById(id: string): Cards | undefined {

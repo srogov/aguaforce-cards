@@ -10,10 +10,6 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
   Popover,
   PopoverButton,
   PopoverPanel,
@@ -21,15 +17,12 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { RemovableBadge } from '@/components/badge'
-import { sortOptions } from '@/data/sort-options'
 import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
-import type { CardSortBy } from '@/services/cards-service'
 
 export default function Home() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [selectedMuscles, setSelectedMuscles] = useState<string[]>([])
   const [selectedTargetAreas, setSelectedTargetAreas] = useState<string[]>([])
-  const [sortBy, setSortBy] = useState<CardSortBy>('main')
 
   function toggleMuscle(muscle: string) {
     setSelectedMuscles((prev) =>
@@ -52,9 +45,11 @@ export default function Home() {
   )
 
   const visibleCards = useMemo(
-    () => getCards({ filter: { muscles: activeMuscles, targetAreas: selectedTargetAreas }, sortBy }),
-    [activeMuscles, selectedTargetAreas, sortBy],
+    () => getCards({ filter: { muscles: activeMuscles, targetAreas: selectedTargetAreas } }),
+    [activeMuscles, selectedTargetAreas],
   )
+
+  const totalCardsCount = useMemo(() => getCards().length, [])
 
   return (
     <div className="bg-gray-50">
@@ -218,82 +213,46 @@ export default function Home() {
             </p>
           </div>
 
+           {(selectedTargetAreas.length > 0 || activeMuscles.length > 0) && (
+            <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+              {selectedTargetAreas.map((targetArea) => (
+                <RemovableBadge
+                  key={`target-area-${targetArea}`}
+                  color="gray"
+                  onRemove={() => toggleTargetArea(targetArea)}
+                >
+                  {targetArea}
+                </RemovableBadge>
+              ))}
+              {activeMuscles.map((muscle) => (
+                <RemovableBadge key={`muscle-${muscle}`} color="blue" onRemove={() => toggleMuscle(muscle)}>
+                  {muscle}
+                </RemovableBadge>
+              ))}
+            </div>
+          )}
+
           {/* Filters */}
           <section aria-labelledby="filter-heading" className="border-t border-gray-200 pt-6">
             <h2 id="filter-heading" className="sr-only">
               Product filters
             </h2>
 
-            {(selectedTargetAreas.length > 0 || activeMuscles.length > 0) && (
-              <div className="flex flex-wrap items-center gap-2 pb-4">
-                {selectedTargetAreas.map((targetArea) => (
-                  <RemovableBadge
-                    key={`target-area-${targetArea}`}
-                    color="indigo"
-                    onRemove={() => toggleTargetArea(targetArea)}
-                  >
-                    {targetArea}
-                  </RemovableBadge>
-                ))}
-                {activeMuscles.map((muscle) => (
-                  <RemovableBadge key={`muscle-${muscle}`} color="blue" onRemove={() => toggleMuscle(muscle)}>
-                    {muscle}
-                  </RemovableBadge>
-                ))}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedTargetAreas([])
-                    setSelectedMuscles([])
-                  }}
-                  className="text-sm font-medium text-gray-500 hover:text-gray-700"
-                >
-                  Clear Filters
-                </button>
-              </div>
-            )}
-
             <div className="flex items-center justify-between">
-              <Menu as="div" className="relative inline-block text-left">
-                <MenuButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                  Sort
-                  <ChevronDownIcon
-                    aria-hidden="true"
-                    className="-mr-1 ml-1 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
-                  />
-                </MenuButton>
+              <span className="text-sm text-gray-500 tabular-nums">
+                {visibleCards.length} of {totalCardsCount}
+              </span>
 
-                <MenuItems
-                  transition
-                  className="absolute left-0 z-10 mt-2 w-40 origin-top-left rounded-md bg-white shadow-2xl ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-                >
-                  <div className="py-1">
-                    {sortOptions.map((option) => (
-                      <MenuItem key={option.name}>
-                        <button
-                          type="button"
-                          onClick={() => setSortBy(option.value)}
-                          className={`block w-full px-4 py-2 text-left text-sm font-medium data-focus:bg-gray-100 data-focus:outline-hidden ${
-                            sortBy === option.value ? 'text-indigo-600' : 'text-gray-900'
-                          }`}
-                        >
-                          {option.name}
-                        </button>
-                      </MenuItem>
-                    ))}
-                  </div>
-                </MenuItems>
-              </Menu>
-
+              {/* Mobile filter button hidden from UI, keep logic intact */}
               <button
                 type="button"
                 onClick={() => setMobileFiltersOpen(true)}
-                className="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden"
+                className="hidden text-sm font-medium text-gray-700 hover:text-gray-900"
               >
                 Filters
               </button>
 
-              <div className="hidden items-center gap-4 sm:flex">
+              <div className="flex items-center gap-4">
                 <Popover className="relative inline-block text-left">
                   <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                     <span>Target Area</span>
