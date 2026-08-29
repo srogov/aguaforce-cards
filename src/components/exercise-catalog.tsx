@@ -115,7 +115,7 @@ export function ExerciseCatalog() {
               <Disclosure as="div" defaultOpen className="border-t border-gray-200 px-4 py-6">
                 <h3 className="-mx-2 -my-3 flow-root">
                   <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
-                    <span className="font-medium text-gray-900">Target Area</span>
+                    <span className="font-medium text-gray-900">Target Muscle Groups</span>
                     <span className="ml-6 flex items-center">
                       <ChevronDownIcon
                         aria-hidden="true"
@@ -287,7 +287,7 @@ export function ExerciseCatalog() {
               <div className="flex items-center gap-4">
                 <Popover className="relative inline-block text-left">
                   <PopoverButton className="group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
-                    <span>Target Area</span>
+                    <span>Target Muscle Groups</span>
                     {selectedTargetAreas.length > 0 ? (
                       <span className="ml-1.5 rounded-sm bg-gray-200 px-1.5 py-0.5 text-xs font-semibold text-gray-700 tabular-nums">
                         {selectedTargetAreas.length}

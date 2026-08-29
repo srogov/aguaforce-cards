@@ -2,14 +2,17 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
+import Link from 'next/link'
+import { Dialog, DialogBackdrop, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { Bars3Icon, HeartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { currencies } from '@/data/currencies'
 import { navigation } from '@/data/navigation'
+import { getTargetAreaOptions } from '@/services/cards-service'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const targetAreaOptions = getTargetAreaOptions()
 
   return (
     <div>
@@ -141,15 +144,44 @@ export default function Header() {
 
                 <div className="hidden h-full lg:flex">
                   <div className="flex h-full items-center justify-center space-x-8">
-                    {navigation.pages.map((page) => (
-                      <a
-                        key={page.name}
-                        href={page.href}
-                        className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                      >
-                        {page.name}
-                      </a>
-                    ))}
+                    {navigation.pages.map((page) =>
+                      page.name === 'Exercise Library' ? (
+                        <Popover key={page.name} className="relative flex h-full items-center">
+                          <PopoverButton className="inline-flex items-center gap-x-1 text-sm font-medium text-gray-700 hover:text-gray-800">
+                            <span>{page.name}</span>
+                            <ChevronDownIcon aria-hidden="true" className="size-5" />
+                          </PopoverButton>
+
+                          <PopoverPanel
+                            transition
+                            className="absolute top-full left-1/2 z-10 mt-5 flex w-screen max-w-min -translate-x-1/2 bg-transparent px-4 transition data-closed:translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
+                          >
+                            {({ close }) => (
+                              <div className="w-56 shrink rounded-xl bg-white p-4 text-sm/6 font-semibold text-gray-900 shadow-lg outline-1 outline-gray-900/5 dark:bg-gray-800 dark:text-white dark:shadow-none dark:outline dark:-outline-offset-1 dark:outline-white/10">
+                                {targetAreaOptions.map((targetArea) => (
+                                  <Link
+                                    key={targetArea}
+                                    href={`/?${new URLSearchParams({ targetAreas: targetArea }).toString()}`}
+                                    onClick={() => close()}
+                                    className="block p-2 hover:text-indigo-600 dark:hover:text-indigo-400"
+                                  >
+                                    {targetArea}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </PopoverPanel>
+                        </Popover>
+                      ) : (
+                        <a
+                          key={page.name}
+                          href={page.href}
+                          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                        >
+                          {page.name}
+                        </a>
+                      ),
+                    )}
                   </div>
                 </div>
 

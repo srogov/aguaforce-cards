@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { HeartIcon, ArrowDownTrayIcon } from '@heroicons/react/20/solid'
+import { ArrowDownTrayIcon } from '@heroicons/react/20/solid'
 import { getCardById, getCardImageDownloadName } from '@/services/cards-service'
 import { BackLink } from '@/components/back-link'
+import { LikeButton } from '@/components/like-button'
+import { Button } from '@/components/button'
 
 type StepsBlock =
   | { type: 'heading'; text: string }
@@ -80,21 +82,11 @@ export default async function CardPage({
             <p className="mt-6 text-gray-500">{card.description}</p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
-              <button
-                type="button"
-                className="flex w-full items-center justify-center gap-x-2 rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 focus:outline-hidden"
-              >
-                <HeartIcon aria-hidden="true" className="size-5" />
-                Like
-              </button>
-              <a
-                href={card.imageSrc}
-                download={getCardImageDownloadName(card)}
-                className="flex w-full items-center justify-center gap-x-2 rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 focus:outline-hidden"
-              >
+              <LikeButton cardId={card.id} />
+              <Button color="main" href={card.imageSrc} download={getCardImageDownloadName(card)}>
                 <ArrowDownTrayIcon aria-hidden="true" className="size-5" />
                 Download
-              </a>
+              </Button>
             </div>
 
             <div className="mt-10 border-t border-gray-200 pt-10">
