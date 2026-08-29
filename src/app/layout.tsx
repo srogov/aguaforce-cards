@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { NavigationTracker } from "@/components/navigation-tracker";
+import { NotificationHost } from "@/components/notification-host";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-gray-50">
         <NavigationTracker />
+        <NotificationHost />
         <Header />
         {children}
         <Footer />

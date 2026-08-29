@@ -18,7 +18,7 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { RemovableBadge } from '@/components/badge'
-import { LikeIconButton } from '@/components/like-icon-button'
+import { LikeIconButton } from '@/components/like-button'
 import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
 
 const TARGET_AREAS_PARAM = 'targetAreas'

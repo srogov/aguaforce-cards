@@ -1,18 +1,26 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Dialog, DialogBackdrop, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
-import { Bars3Icon, HeartIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline'
+import { HeartIcon as HeartIconSolid, ChevronDownIcon } from '@heroicons/react/20/solid'
 import { currencies } from '@/data/currencies'
 import { navigation } from '@/data/navigation'
 import { getTargetAreaOptions } from '@/services/cards-service'
+import { getLikedCount, subscribeToLikedCardIds } from '@/services/likes-service'
+
+function getServerLikedCount() {
+  return 0
+}
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const targetAreaOptions = getTargetAreaOptions()
+  const likedCount = useSyncExternalStore(subscribeToLikedCardIds, getLikedCount, getServerLikedCount)
+  const highlighted = likedCount > 1
 
   return (
     <div>
@@ -214,10 +222,19 @@ export default function Header() {
                   {/* Wishlist */}
                   <div className="flow-root">
                     <a href="#" className="group -m-2 flex items-center p-2">
-                      <HeartIcon
-                        aria-hidden="true"
-                        className="size-6 shrink-0 text-gray-400 group-hover:text-gray-500"
-                      />
+                      {highlighted ? (
+                        <HeartIconSolid aria-hidden="true" className="size-6 shrink-0 text-red-500" />
+                      ) : (
+                        <HeartIconOutline
+                          aria-hidden="true"
+                          className="size-6 shrink-0 text-gray-400 group-hover:text-gray-500"
+                        />
+                      )}
+                      <span
+                        className={`ml-1 text-sm font-medium ${highlighted ? 'text-red-500' : 'text-gray-700 group-hover:text-gray-800'}`}
+                      >
+                        {likedCount}
+                      </span>
                       <span className="sr-only">items in wishlist, view favorites</span>
                     </a>
                   </div>
