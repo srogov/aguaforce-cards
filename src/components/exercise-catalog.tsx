@@ -20,7 +20,9 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { RemovableBadge } from '@/components/badge'
 import { LikeIconButton } from '@/components/like-button'
 import { CardDetailsDrawer } from '@/components/card-details-drawer'
+import { Container } from '@/components/container'
 import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
+import type { Cards } from '@/services/cards-service'
 import { getLikedCardIds, subscribeToLikedCardIds } from '@/services/likes-service'
 import { parseSteps } from '@/lib/steps'
 
@@ -38,13 +40,11 @@ function getServerLikedCardIdsKey() {
 }
 
 export function ExerciseCatalog({
-  title = 'Exercise Library',
-  description = 'Exercises to perform using your AguaForce water weights.',
+  children,
   onlyLiked = false,
   layout = 'grid',
 }: {
-  title?: string
-  description?: string
+  children?: React.ReactNode
   onlyLiked?: boolean
   layout?: 'grid' | 'list'
 } = {}) {
@@ -110,10 +110,13 @@ export function ExerciseCatalog({
     [selectedMuscles, selectedTargetAreas],
   )
 
-  const visibleCards = useMemo(
-    () => (onlyLiked ? allMatchingCards.filter((card) => likedCardIds.includes(card.id)) : allMatchingCards),
-    [allMatchingCards, onlyLiked, likedCardIds],
-  )
+  const visibleCards = useMemo(() => {
+    if (!onlyLiked) return allMatchingCards
+    const matchingById = new Map(allMatchingCards.map((card) => [card.id, card]))
+    return likedCardIds
+      .map((id) => matchingById.get(id))
+      .filter((card): card is Cards => card !== undefined)
+  }, [allMatchingCards, onlyLiked, likedCardIds])
 
   const totalCardsCount = useMemo(
     () => (onlyLiked ? likedCardIds.length : getCards().length),
@@ -139,7 +142,7 @@ export function ExerciseCatalog({
               <button
                 type="button"
                 onClick={() => setMobileFiltersOpen(false)}
-                className="relative -mr-2 flex size-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
+                className="relative -mr-2 flex size-10 cursor-pointer items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-indigo-500 focus:outline-hidden"
               >
                 <span className="absolute -inset-0.5" />
                 <span className="sr-only">Close menu</span>
@@ -274,11 +277,8 @@ export function ExerciseCatalog({
       </Dialog>
 
       <main>
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="py-24 text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">{title}</h1>
-            <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">{description}</p>
-          </div>
+        <Container>
+          {children}
 
            {(selectedTargetAreas.length > 0 || selectedMuscles.length > 0) && (
             <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
@@ -314,7 +314,7 @@ export function ExerciseCatalog({
               <button
                 type="button"
                 onClick={() => setMobileFiltersOpen(true)}
-                className="hidden text-sm font-medium text-gray-700 hover:text-gray-900"
+                className="hidden cursor-pointer text-sm font-medium text-gray-700 hover:text-gray-900"
               >
                 Filters
               </button>
@@ -597,7 +597,7 @@ export function ExerciseCatalog({
               </a>
             </div>
           </section>
-        </div>
+        </Container>
       </main>
 
       <CardDetailsDrawer

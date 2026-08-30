@@ -97,7 +97,7 @@ export function RemovableBadge({
       <button
         type="button"
         onClick={onRemove}
-        className={`group relative -mr-1 size-3.5 rounded-xs ${classes.button}`}
+        className={`group relative -mr-1 size-3.5 cursor-pointer rounded-xs ${classes.button}`}
       >
         <span className="sr-only">Remove</span>
         <svg viewBox="0 0 14 14" className={`size-3.5 ${classes.stroke}`}>

@@ -6,7 +6,7 @@ const colorStyles = {
 } as const
 
 const baseStyles =
-  'flex w-full items-center justify-center gap-x-2 rounded-md border border-transparent px-8 py-3 text-base font-medium focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 focus:outline-hidden'
+  'flex w-full cursor-pointer items-center justify-center gap-x-2 rounded-md border border-transparent px-8 py-3 text-base font-medium focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 focus:outline-hidden'
 
 type ButtonColor = keyof typeof colorStyles
 

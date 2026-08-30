@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { footerNavigation } from '@/data/navigation'
+import { Container } from '@/components/container'
 
 const social = [
   {
@@ -71,7 +72,7 @@ export default function Footer() {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
+      <Container className="overflow-hidden py-20 sm:py-24">
         <nav aria-label="Footer" className="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6">
           {footerNavigation.map((item) => (
             <a key={item.name} href={item.href} className="text-gray-600 hover:text-gray-900">
@@ -98,7 +99,7 @@ export default function Footer() {
           ))}
         </div>
         <p className="mt-10 text-center text-sm/6 text-gray-600">&copy; 2021 Your Company, Inc. All rights reserved.</p>
-      </div>
+      </Container>
     </footer>
   )
 }

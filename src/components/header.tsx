@@ -10,6 +10,7 @@ import { HeartIcon as HeartIconSolid, ChevronDownIcon } from '@heroicons/react/2
 import { navigation } from '@/data/navigation'
 import { getTargetAreaOptions } from '@/services/cards-service'
 import { getLikedCount, subscribeToLikedCardIds } from '@/services/likes-service'
+import { Container } from '@/components/container'
 
 function getServerLikedCount() {
   return 0
@@ -49,7 +50,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="relative -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
+                className="relative -m-2 inline-flex cursor-pointer items-center justify-center rounded-md p-2 text-gray-400"
               >
                 <span className="absolute -inset-0.5" />
                 <span className="sr-only">Close menu</span>
@@ -75,7 +76,7 @@ export default function Header() {
         <nav aria-label="Top">
           {/* Secondary navigation */}
           <div className="bg-white shadow-xs">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <Container>
               <div className="flex h-16 items-center justify-between">
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
@@ -140,7 +141,7 @@ export default function Header() {
                   <button
                     type="button"
                     onClick={() => setMobileMenuOpen(true)}
-                    className="-ml-2 rounded-md bg-white p-2 text-gray-400"
+                    className="-ml-2 cursor-pointer rounded-md bg-white p-2 text-gray-400"
                   >
                     <span className="sr-only">Open menu</span>
                     <Bars3Icon aria-hidden="true" className="size-6" />
@@ -191,7 +192,7 @@ export default function Header() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Container>
           </div>
         </nav>
       </header>

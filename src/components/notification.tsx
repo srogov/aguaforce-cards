@@ -64,7 +64,7 @@ export function Notification({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="inline-flex rounded-md text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600 dark:hover:text-white dark:focus:outline-indigo-500"
+                    className="inline-flex cursor-pointer rounded-md text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600 dark:hover:text-white dark:focus:outline-indigo-500"
                   >
                     <span className="sr-only">Close</span>
                     <XMarkIcon aria-hidden="true" className="size-5" />

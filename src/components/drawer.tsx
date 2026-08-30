@@ -53,7 +53,7 @@ export function Drawer({
                     <button
                       type="button"
                       onClick={onClose}
-                      className="relative rounded-md text-gray-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="relative cursor-pointer rounded-md text-gray-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                       <span className="absolute -inset-2.5" />
                       <span className="sr-only">Close panel</span>
@@ -76,7 +76,7 @@ export function Drawer({
                             <button
                               type="button"
                               onClick={onClose}
-                              className="relative rounded-md text-gray-400 hover:text-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:hover:text-white dark:focus-visible:outline-indigo-500"
+                              className="relative cursor-pointer rounded-md text-gray-400 hover:text-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:hover:text-white dark:focus-visible:outline-indigo-500"
                             >
                               <span className="absolute -inset-2.5" />
                               <span className="sr-only">Close panel</span>

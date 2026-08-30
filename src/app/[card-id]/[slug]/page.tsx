@@ -6,6 +6,7 @@ import { parseSteps } from '@/lib/steps'
 import { BackLink } from '@/components/back-link'
 import { LikeButton } from '@/components/like-button'
 import { Button } from '@/components/button'
+import { Container } from '@/components/container'
 
 export default async function CardPage({
   params,
@@ -23,7 +24,7 @@ export default async function CardPage({
 
   return (
     <div className="bg-white">
-      <div className="mx-auto px-4 py-6 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
+      <Container className="py-6 sm:py-10">
         <BackLink href="/" label="All Exercises" />
 
         {/* Card */}
@@ -151,7 +152,7 @@ export default async function CardPage({
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   )
 }
