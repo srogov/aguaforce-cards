@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useSyncExternalStore } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -20,6 +20,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { RemovableBadge } from '@/components/badge'
 import { LikeIconButton } from '@/components/like-button'
 import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
+import { getLikedCardIds, subscribeToLikedCardIds } from '@/services/likes-service'
 
 const TARGET_AREAS_PARAM = 'target-muscle-groups'
 const MUSCLES_PARAM = 'muscles'
@@ -30,7 +31,19 @@ function parseListParam(searchParams: URLSearchParams, key: string): string[] {
   return raw.split(',').filter(Boolean)
 }
 
-export function ExerciseCatalog() {
+function getServerLikedCardIdsKey() {
+  return ''
+}
+
+export function ExerciseCatalog({
+  title = 'Exercise Library',
+  description = 'Exercises to perform using your AguaForce water weights.',
+  onlyLiked = false,
+}: {
+  title?: string
+  description?: string
+  onlyLiked?: boolean
+} = {}) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
@@ -77,12 +90,30 @@ export function ExerciseCatalog() {
     updateListParam(TARGET_AREAS_PARAM, next)
   }
 
-  const visibleCards = useMemo(
+  const likedCardIdsKey = useSyncExternalStore(
+    subscribeToLikedCardIds,
+    () => getLikedCardIds().join(','),
+    getServerLikedCardIdsKey,
+  )
+  const likedCardIds = useMemo(
+    () => (likedCardIdsKey ? likedCardIdsKey.split(',') : []),
+    [likedCardIdsKey],
+  )
+
+  const allMatchingCards = useMemo(
     () => getCards({ filter: { muscles: selectedMuscles, targetAreas: selectedTargetAreas } }),
     [selectedMuscles, selectedTargetAreas],
   )
 
-  const totalCardsCount = useMemo(() => getCards().length, [])
+  const visibleCards = useMemo(
+    () => (onlyLiked ? allMatchingCards.filter((card) => likedCardIds.includes(card.id)) : allMatchingCards),
+    [allMatchingCards, onlyLiked, likedCardIds],
+  )
+
+  const totalCardsCount = useMemo(
+    () => (onlyLiked ? likedCardIds.length : getCards().length),
+    [onlyLiked, likedCardIds],
+  )
 
   return (
     <div className="bg-gray-50">
@@ -240,10 +271,8 @@ export function ExerciseCatalog() {
       <main>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="py-24 text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">Exercise Library</h1>
-            <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
-              Exercises to perform using your AguaForce water weights.
-            </p>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">{title}</h1>
+            <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">{description}</p>
           </div>
 
            {(selectedTargetAreas.length > 0 || selectedMuscles.length > 0) && (

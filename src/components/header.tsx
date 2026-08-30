@@ -163,7 +163,7 @@ export default function Header() {
                 <div className="flex flex-1 items-center justify-end">
                   {/* Wishlist */}
                   <div className="flow-root">
-                    <a href="#" className="group -m-2 flex items-center p-2">
+                    <Link href="/likes" className="group -m-2 flex items-center p-2">
                       {highlighted ? (
                         <HeartIconSolid aria-hidden="true" className="size-6 shrink-0 text-red-500" />
                       ) : (
@@ -187,7 +187,7 @@ export default function Header() {
                         </span>
                       </span>
                       <span className="sr-only">items in wishlist, view favorites</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
