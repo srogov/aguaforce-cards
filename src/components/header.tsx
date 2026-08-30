@@ -111,7 +111,7 @@ export default function Header() {
                                 {targetAreaOptions.map((targetArea) => (
                                   <Link
                                     key={targetArea}
-                                    href={`/?${new URLSearchParams({ targetAreas: targetArea }).toString()}`}
+                                    href={`/?${new URLSearchParams({ 'target-muscle-groups': targetArea }).toString()}`}
                                     onClick={() => close()}
                                     className="block p-2 hover:text-indigo-600 dark:hover:text-indigo-400"
                                   >
