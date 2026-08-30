@@ -30,7 +30,13 @@ export function LikeButton({ cardId }: { cardId: string }) {
   )
 }
 
-export function LikeIconButton({ cardId }: { cardId: string }) {
+export function LikeIconButton({
+  cardId,
+  className = 'absolute top-2 right-2 z-10 flex size-8 items-center justify-center rounded-full bg-white/80 shadow-sm backdrop-blur-sm hover:bg-white',
+}: {
+  cardId: string
+  className?: string
+}) {
   const liked = useSyncExternalStore(subscribeToLikedCardIds, () => isCardLiked(cardId), getServerSnapshot)
 
   return (
@@ -43,7 +49,7 @@ export function LikeIconButton({ cardId }: { cardId: string }) {
       }}
       aria-pressed={liked}
       aria-label={liked ? 'Unlike' : 'Like'}
-      className="absolute top-2 right-2 z-10 flex size-8 items-center justify-center rounded-full bg-white/80 shadow-sm backdrop-blur-sm hover:bg-white"
+      className={className}
     >
       {liked ? (
         <HeartIconSolid aria-hidden="true" className="size-5 text-red-400" />

@@ -19,6 +19,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { RemovableBadge } from '@/components/badge'
 import { LikeIconButton } from '@/components/like-button'
+import { CardDetailsDrawer } from '@/components/card-details-drawer'
 import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
 import { getLikedCardIds, subscribeToLikedCardIds } from '@/services/likes-service'
 
@@ -48,6 +49,7 @@ export function ExerciseCatalog({
   const searchParams = useSearchParams()
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
 
   const targetAreaOptions: string[] = useMemo(() => getTargetAreaOptions(), [])
 
@@ -145,7 +147,7 @@ export function ExerciseCatalog({
             {/* Filters */}
             <form className="mt-4">
               <Disclosure as="div" defaultOpen className="border-t border-gray-200 px-4 py-6">
-                <h3 className="-mx-2 -my-3 flow-root">
+                <h3 className="font-medium text-gray-900">
                   <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
                     <span className="font-medium text-gray-900">Target Muscle Groups</span>
                     <span className="ml-6 flex items-center">
@@ -207,7 +209,7 @@ export function ExerciseCatalog({
               {/* Target Muscles filter hidden from UI, keep logic intact */}
               {false && (
                 <Disclosure as="div" defaultOpen className="border-t border-gray-200 px-4 py-6">
-                  <h3 className="-mx-2 -my-3 flow-root">
+                  <h3 className="font-medium text-gray-900">
                     <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-sm text-gray-400">
                       <span className="font-medium text-gray-900">Target Muscles</span>
                       <span className="ml-6 flex items-center">
@@ -462,17 +464,27 @@ export function ExerciseCatalog({
                 <Link key={card.id} href={`/${card.id}/${card.slug}`} className="group">
                   <div className="relative overflow-hidden rounded-lg bg-gray-100 shadow-sm">
                     <LikeIconButton cardId={card.id} />
-                    <Image
-                      alt={card.imageAlt}
-                      src={card.imageSrc}
-                      width={1050}
-                      height={750}
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="h-auto w-full group-hover:opacity-75"
-                    />
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        setSelectedCardId(card.id)
+                      }}
+                      className="block w-full"
+                    >
+                      <Image
+                        alt={card.imageAlt}
+                        src={card.imageSrc}
+                        width={1050}
+                        height={750}
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        className="h-auto w-full group-hover:opacity-75"
+                      />
+                    </button>
                   </div>
                   <div className="mt-4">
-                    <h3 className="text-base font-medium text-gray-900">{card.name}</h3>
+                    <h3 className="font-medium text-gray-900">{card.name}</h3>
                     <p className="mt-1 text-sm text-gray-500">{card.muscles.join(', ')}</p>
                     {card.muscles2.length > 0 && (
                       <p className="mt-1 text-xs text-gray-400">{card.muscles2.join(', ')}</p>
@@ -514,6 +526,12 @@ export function ExerciseCatalog({
           </section>
         </div>
       </main>
+
+      <CardDetailsDrawer
+        cardId={selectedCardId}
+        open={selectedCardId !== null}
+        onClose={() => setSelectedCardId(null)}
+      />
     </div>
   )
 }

@@ -2,41 +2,10 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowDownTrayIcon } from '@heroicons/react/20/solid'
 import { getCardById, getCardImageDownloadName } from '@/services/cards-service'
+import { parseSteps } from '@/lib/steps'
 import { BackLink } from '@/components/back-link'
 import { LikeButton } from '@/components/like-button'
 import { Button } from '@/components/button'
-
-type StepsBlock =
-  | { type: 'heading'; text: string }
-  | { type: 'list'; items: string[] }
-
-function parseSteps(markdown: string): StepsBlock[] {
-  const blocks: StepsBlock[] = []
-  const lines = markdown.split('\n')
-
-  for (const rawLine of lines) {
-    const line = rawLine.trim()
-    if (!line) continue
-
-    if (line.startsWith('### ')) {
-      blocks.push({ type: 'heading', text: line.slice(4) })
-      continue
-    }
-
-    if (line.startsWith('- ')) {
-      const item = line.slice(2)
-      const last = blocks[blocks.length - 1]
-      if (last?.type === 'list') {
-        last.items.push(item)
-      } else {
-        blocks.push({ type: 'list', items: [item] })
-      }
-      continue
-    }
-  }
-
-  return blocks
-}
 
 export default async function CardPage({
   params,
@@ -54,11 +23,11 @@ export default async function CardPage({
 
   return (
     <div className="bg-white">
-      <div className="mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto px-4 py-6 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
         <BackLink href="/" label="All Exercises" />
 
         {/* Card */}
-        <div className="mt-8 lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
+        <div className="mt-4 lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
           {/* Card image */}
           <div className="lg:col-span-4 lg:row-end-1">
             <Image
@@ -72,7 +41,7 @@ export default async function CardPage({
           </div>
 
           {/* Card details */}
-          <div className="mx-auto mt-14 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
+          <div className="mx-auto mt-4 max-w-2xl sm:mt-16 lg:col-span-3 lg:row-span-2 lg:row-end-2 lg:mt-0 lg:max-w-none">
             <div className="flex flex-col-reverse">
               <div className="mt-4">
                 <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{card.name}</h1>
@@ -90,7 +59,7 @@ export default async function CardPage({
             </div>
 
             <div className="mt-10 border-t border-gray-200 pt-10">
-              <h3 className="text-sm font-medium text-gray-900">Main Muscles</h3>
+              <h3 className="font-medium text-gray-900">Main Muscles</h3>
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300">
                   {card.muscles.map((muscle) => (
@@ -103,7 +72,7 @@ export default async function CardPage({
             </div>
 
             <div className="mt-10">
-              <h3 className="text-sm font-medium text-gray-900">Supporting Muscles</h3>
+              <h3 className="font-medium text-gray-900">Supporting Muscles</h3>
               <div className="mt-4">
                 <ul role="list" className="list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300">
                   {card.muscles2.map((muscle) => (
@@ -116,7 +85,7 @@ export default async function CardPage({
             </div>
 
             <div className="mt-10 border-t border-gray-200 pt-10">
-              <h3 className="text-sm font-medium text-gray-900">Share</h3>
+              <h3 className="font-medium text-gray-900">Share</h3>
               <ul role="list" className="mt-4 flex items-center space-x-6">
                 <li>
                   <a href="#" className="flex size-6 items-center justify-center text-gray-400 hover:text-gray-500">
@@ -155,14 +124,13 @@ export default async function CardPage({
           </div>
 
           <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
-            <h3 className="sr-only">Steps</h3>
-            <div className="text-sm text-gray-500 *:first:mt-0">
+            <div className="text-gray-500 *:first:mt-0">
               {stepsBlocks.map((block, index) => {
                 if (block.type === 'heading') {
                   return (
-                    <h4 key={index} className="mt-10 text-base font-medium text-gray-900 first:mt-0">
+                    <h3 key={index} className="font-medium text-gray-900 mt-10 first:mt-0">
                       {block.text}
-                    </h4>
+                    </h3>
                   )
                 }
 
