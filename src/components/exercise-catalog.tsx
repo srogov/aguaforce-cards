@@ -21,7 +21,7 @@ import { RemovableBadge } from '@/components/badge'
 import { LikeIconButton } from '@/components/like-button'
 import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
 
-const TARGET_AREAS_PARAM = 'targetAreas'
+const TARGET_AREAS_PARAM = 'target-muscle-groups'
 const MUSCLES_PARAM = 'muscles'
 
 function parseListParam(searchParams: URLSearchParams, key: string): string[] {
@@ -302,7 +302,7 @@ export function ExerciseCatalog() {
 
                   <PopoverPanel
                     transition
-                    className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                    className="absolute right-0 z-20 mt-2 origin-top-right rounded-md bg-white p-4 shadow-2xl ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
                   >
                     <form className="space-y-4">
                       {targetAreaOptions.map((targetArea, optionIdx) => (
