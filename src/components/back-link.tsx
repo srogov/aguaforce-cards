@@ -4,7 +4,15 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/20/solid'
 import { hasInternalHistory } from '@/lib/navigation-history'
 
-export function BackLink({ href, label }: { href: string; label: string }) {
+export function BackLink({
+  href,
+  label,
+  className,
+}: {
+  href: string
+  label: string
+  className?: string
+}) {
   const router = useRouter()
 
   function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -20,7 +28,7 @@ export function BackLink({ href, label }: { href: string; label: string }) {
     <a
       href={href}
       onClick={handleClick}
-      className="inline-flex items-center gap-x-2 text-sm font-medium text-gray-500 hover:text-gray-700"
+      className={`inline-flex items-center gap-x-2 text-sm font-medium text-gray-500 hover:text-gray-700 ${className ?? ''}`}
     >
       <ArrowLeftIcon aria-hidden="true" className="size-4" />
       {label}

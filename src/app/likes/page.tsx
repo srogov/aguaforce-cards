@@ -9,8 +9,10 @@ export default async function Likes() {
   await connection()
   return (
     <ExerciseCatalog onlyLiked layout="list">
-      <BackLink href="/" label="All Exercises" />
-      <div className="py-12 text-center">
+      <div className="pt-6 sm:pt-10">
+        <BackLink href="/" label="All Exercises" />
+      </div>
+      <div className="py-8 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-gray-900">Saved Exercises</h1>
         <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
           Exercises you&apos;ve saved for quick access later.
