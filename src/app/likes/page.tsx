@@ -10,6 +10,7 @@ export default async function Likes() {
       title="Saved Exercises"
       description="Exercises you've saved for quick access later."
       onlyLiked
+      layout="list"
     />
   )
 }

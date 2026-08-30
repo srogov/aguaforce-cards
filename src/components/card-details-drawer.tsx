@@ -87,7 +87,7 @@ export function CardDetailsDrawer({
           {stepsBlocks.map((block, index) => {
             if (block.type === 'heading') {
               return (
-                <h3 key={index} className="font-medium text-gray-900">
+                <h3 key={index} className="font-medium text-gray-900 mt-4 first:mt-0">
                   {block.text}
                 </h3>
               )

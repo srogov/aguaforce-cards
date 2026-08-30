@@ -22,6 +22,7 @@ import { LikeIconButton } from '@/components/like-button'
 import { CardDetailsDrawer } from '@/components/card-details-drawer'
 import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/cards-service'
 import { getLikedCardIds, subscribeToLikedCardIds } from '@/services/likes-service'
+import { parseSteps } from '@/lib/steps'
 
 const TARGET_AREAS_PARAM = 'target-muscle-groups'
 const MUSCLES_PARAM = 'muscles'
@@ -40,10 +41,12 @@ export function ExerciseCatalog({
   title = 'Exercise Library',
   description = 'Exercises to perform using your AguaForce water weights.',
   onlyLiked = false,
+  layout = 'grid',
 }: {
   title?: string
   description?: string
   onlyLiked?: boolean
+  layout?: 'grid' | 'list'
 } = {}) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -459,40 +462,110 @@ export function ExerciseCatalog({
               Exercises
             </h2>
 
-            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-              {visibleCards.map((card) => (
-                <Link key={card.id} href={`/${card.id}/${card.slug}`} className="group">
-                  <div className="relative overflow-hidden rounded-lg bg-gray-100 shadow-sm">
-                    <LikeIconButton cardId={card.id} />
-                    <button
-                      type="button"
-                      onClick={(event) => {
-                        event.preventDefault()
-                        event.stopPropagation()
-                        setSelectedCardId(card.id)
-                      }}
-                      className="block w-full"
-                    >
-                      <Image
-                        alt={card.imageAlt}
-                        src={card.imageSrc}
-                        width={1050}
-                        height={750}
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        className="h-auto w-full group-hover:opacity-75"
-                      />
-                    </button>
-                  </div>
-                  <div className="mt-4">
-                    <h3 className="font-medium text-gray-900">{card.name}</h3>
-                    <p className="mt-1 text-sm text-gray-500">{card.muscles.join(', ')}</p>
-                    {card.muscles2.length > 0 && (
-                      <p className="mt-1 text-xs text-gray-400">{card.muscles2.join(', ')}</p>
-                    )}
-                  </div>
-                </Link>
-              ))}
-            </div>
+            {layout === 'list' ? (
+              <div className="grid grid-cols-1 gap-y-12 sm:gap-y-16">
+                {visibleCards.map((card, cardIndex) => {
+                  const stepsBlocks = parseSteps(card.steps)
+                  return (
+                    <Link key={card.id} href={`/${card.id}/${card.slug}`} className="group block">
+                      <div className="sm:grid sm:grid-cols-2 sm:items-center sm:gap-x-8">
+                        <div className="mb-4 sm:hidden">
+                          <h3 className="font-medium text-gray-900">
+                            {cardIndex + 1}. {card.name}
+                          </h3>
+                        </div>
+                        <div className="relative overflow-hidden rounded-lg bg-gray-100 shadow-sm">
+                          <LikeIconButton cardId={card.id} />
+                          <button
+                            type="button"
+                            onClick={(event) => {
+                              event.preventDefault()
+                              event.stopPropagation()
+                              setSelectedCardId(card.id)
+                            }}
+                            className="block w-full cursor-pointer"
+                          >
+                            <Image
+                              alt={card.imageAlt}
+                              src={card.imageSrc}
+                              width={1050}
+                              height={750}
+                              sizes="(min-width: 640px) 50vw, 100vw"
+                              className="h-auto w-full group-hover:opacity-75"
+                            />
+                          </button>
+                        </div>
+                        <div className="hidden sm:block">
+                          <h3 className="text-lg font-medium text-gray-900">
+                            {cardIndex + 1}. {card.name}
+                          </h3>
+                          <div className="mt-4 text-gray-500 *:first:mt-0">
+                            {stepsBlocks.map((block, index) => {
+                              if (block.type === 'heading') {
+                                return (
+                                  <h4 key={index} className="mt-4 font-medium text-gray-900 first:mt-0">
+                                    {block.text}
+                                  </h4>
+                                )
+                              }
+
+                              return (
+                                <ul
+                                  key={index}
+                                  role="list"
+                                  className="mt-4 list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300"
+                                >
+                                  {block.items.map((item, itemIndex) => (
+                                    <li key={itemIndex} className="pl-2">
+                                      {item}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                {visibleCards.map((card) => (
+                  <Link key={card.id} href={`/${card.id}/${card.slug}`} className="group">
+                    <div className="relative overflow-hidden rounded-lg bg-gray-100 shadow-sm">
+                      <LikeIconButton cardId={card.id} />
+                      <button
+                        type="button"
+                        onClick={(event) => {
+                          event.preventDefault()
+                          event.stopPropagation()
+                          setSelectedCardId(card.id)
+                        }}
+                        className="block w-full cursor-pointer"
+                      >
+                        <Image
+                          alt={card.imageAlt}
+                          src={card.imageSrc}
+                          width={1050}
+                          height={750}
+                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                          className="h-auto w-full group-hover:opacity-75"
+                        />
+                      </button>
+                    </div>
+                    <div className="mt-4">
+                      <h3 className="font-medium text-gray-900">{card.name}</h3>
+                      <p className="mt-1 text-sm text-gray-500">{card.muscles.join(', ')}</p>
+                      {card.muscles2.length > 0 && (
+                        <p className="mt-1 text-xs text-gray-400">{card.muscles2.join(', ')}</p>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </section>
 
           <section aria-labelledby="featured-heading" className="relative mt-16 mb-24 overflow-hidden rounded-lg lg:h-96">
