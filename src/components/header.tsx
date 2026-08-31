@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Dialog, DialogBackdrop, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -12,6 +11,7 @@ import { LINKS } from '@/config'
 import { getTargetAreaOptions } from '@/services/cards-service'
 import { getLikedCount, subscribeToLikedCardIds } from '@/services/likes-service'
 import { Container } from '@/components/container'
+import { Logo } from '@/components/logo'
 
 function getServerLikedCount() {
   return 0
@@ -82,15 +82,8 @@ export default function Header() {
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                   <Link href={LINKS.home('header_logo_desktop')}>
-                    <span className="sr-only">Your Company</span>
-                    <Image
-                      alt=""
-                      src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                      width={32}
-                      height={32}
-                      unoptimized
-                      className="h-8 w-auto"
-                    />
+                    <span className="sr-only">AguaForce</span>
+                    <Logo variant="wordmark" className="h-8 w-auto" />
                   </Link>
                 </div>
 
@@ -151,15 +144,8 @@ export default function Header() {
 
                 {/* Logo (lg-) */}
                 <Link href={LINKS.home('header_logo_mobile')} className="lg:hidden">
-                  <span className="sr-only">Your Company</span>
-                  <Image
-                    alt=""
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                    width={32}
-                    height={32}
-                    unoptimized
-                    className="h-8 w-auto"
-                  />
+                  <span className="sr-only">AguaForce</span>
+                  <Logo variant="wordmark" className="h-6 w-auto" />
                 </Link>
 
                 <div className="flex flex-1 items-center justify-end">
