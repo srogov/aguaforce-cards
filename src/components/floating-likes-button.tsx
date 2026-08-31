@@ -27,7 +27,7 @@ export function FloatingLikesButton() {
     previousLikedCount.current = likedCount
   }, [likedCount])
 
-  if (pathname === '/likes') {
+  if (pathname === '/likes' || likedCount === 0) {
     return null
   }
 
