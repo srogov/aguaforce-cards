@@ -8,6 +8,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline'
 import { HeartIcon as HeartIconSolid, ChevronDownIcon } from '@heroicons/react/20/solid'
 import { navigation } from '@/data/navigation'
+import { LINKS } from '@/config'
 import { getTargetAreaOptions } from '@/services/cards-service'
 import { getLikedCount, subscribeToLikedCardIds } from '@/services/likes-service'
 import { Container } from '@/components/container'
@@ -80,7 +81,7 @@ export default function Header() {
               <div className="flex h-16 items-center justify-between">
                 {/* Logo (lg+) */}
                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
-                  <a href="#">
+                  <Link href={LINKS.home('header_logo_desktop')}>
                     <span className="sr-only">Your Company</span>
                     <Image
                       alt=""
@@ -90,7 +91,7 @@ export default function Header() {
                       unoptimized
                       className="h-8 w-auto"
                     />
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="hidden h-full lg:flex">
@@ -149,7 +150,7 @@ export default function Header() {
                 </div>
 
                 {/* Logo (lg-) */}
-                <a href="#" className="lg:hidden">
+                <Link href={LINKS.home('header_logo_mobile')} className="lg:hidden">
                   <span className="sr-only">Your Company</span>
                   <Image
                     alt=""
@@ -159,7 +160,7 @@ export default function Header() {
                     unoptimized
                     className="h-8 w-auto"
                   />
-                </a>
+                </Link>
 
                 <div className="flex flex-1 items-center justify-end">
                   {/* Wishlist */}

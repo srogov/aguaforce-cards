@@ -26,6 +26,7 @@ import { getCards, getMuscleOptions, getTargetAreaOptions } from '@/services/car
 import type { Cards } from '@/services/cards-service'
 import { getLikedCardIds, subscribeToLikedCardIds } from '@/services/likes-service'
 import { parseSteps } from '@/lib/steps'
+import { LINKS } from '@/config'
 
 const TARGET_AREAS_PARAM = 'target-muscle-groups'
 const MUSCLES_PARAM = 'muscles'
@@ -584,17 +585,17 @@ export function ExerciseCatalog({
             <div className="absolute inset-x-0 bottom-0 rounded-br-lg rounded-bl-lg bg-black/75 p-6 backdrop-blur-sm backdrop-filter sm:flex sm:items-center sm:justify-between lg:inset-x-auto lg:inset-y-0 lg:w-96 lg:flex-col lg:items-start lg:rounded-tl-lg lg:rounded-br-none">
               <div>
                 <h2 id="featured-heading" className="text-xl font-bold text-white">
-                  Workspace Collection
+                  Train With AguaForce Weights
                 </h2>
                 <p className="mt-1 text-sm text-gray-300">
-                  Upgrade your desk with objects that keep you organized and clear-minded.
+                  Experience dynamic fluid resistance with AguaForce water-filled weights. Order yours today to build your custom home routine.
                 </p>
               </div>
               <a
-                href="#"
+                href={LINKS.shop}
                 className="mt-6 flex shrink-0 items-center justify-center rounded-md border border-white/25 px-4 py-3 text-base font-medium text-white hover:bg-white/10 sm:mt-0 sm:ml-8 lg:ml-0 lg:w-full"
               >
-                View the collection
+                Get AguaForce Weights
               </a>
             </div>
           </section>

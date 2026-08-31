@@ -1,6 +1,8 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { footerNavigation } from '@/data/navigation'
 import { Container } from '@/components/container'
+import { LINKS } from '@/config'
 
 const social = [
   {
@@ -81,14 +83,16 @@ export default function Footer() {
           ))}
         </nav>
         <div className="mt-16 flex justify-center">
-          <Image
-            alt=""
-            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-            width={32}
-            height={32}
-            unoptimized
-            className="h-8 w-auto"
-          />
+          <Link href={LINKS.home('footer_logo')}>
+            <Image
+              alt="logo"
+              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+              width={32}
+              height={32}
+              unoptimized
+              className="h-8 w-auto"
+            />
+          </Link>
         </div>
         <div className="mt-10 flex justify-center gap-x-10">
           {social.map((item) => (

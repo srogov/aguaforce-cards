@@ -1,3 +1,5 @@
+import { LINKS } from '@/config'
+
 export type NavigationFeaturedItem = {
   name: string
   href: string
@@ -21,14 +23,14 @@ export const navigation: {
 } = {
   categories: [],
   pages: [
-    { name: 'Shop', href: '#' },
-    { name: 'Exercise Library', href: '#' },
+    { name: 'Shop', href: LINKS.shop },
+    { name: 'Exercise Library', href: LINKS.home('nav_exercise_library') },
   ],
 }
 
 export const footerNavigation: NavigationPage[] = [
   ...navigation.pages,
-  { name: 'Terms', href: '#' },
-  { name: 'Privacy', href: '#' },
-  { name: 'Contact', href: '#' },
+  { name: 'Terms', href: LINKS.terms },
+  { name: 'Privacy', href: LINKS.privacy },
+  { name: 'Contact', href: LINKS.contact },
 ]
