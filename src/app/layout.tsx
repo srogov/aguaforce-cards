@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { NavigationTracker } from "@/components/navigation-tracker";
 import { NotificationHost } from "@/components/notification-host";
+import { FloatingLikesButton } from "@/components/floating-likes-button";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        <FloatingLikesButton />
       </body>
     </html>
   );

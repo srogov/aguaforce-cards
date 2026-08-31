@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useSyncExternalStore } from 'react'
 import Image from 'next/image'
+import bannerImage from '@/images/banners/banner-5.png'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import {
@@ -572,7 +573,7 @@ export function ExerciseCatalog({
             <div className="absolute inset-0">
               <Image
                 alt=""
-                src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-01-featured-collection.jpg"
+                src={bannerImage}
                 fill
                 sizes="100vw"
                 className="object-cover"
