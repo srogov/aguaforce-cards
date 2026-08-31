@@ -15,7 +15,7 @@ export default async function Likes() {
       <div className="py-8 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-gray-900">Saved Exercises</h1>
         <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
-          Exercises you&apos;ve saved for quick access later.
+          Build your custom AguaForce routine with your saved exercises. Shuffle the sequence anytime, or click an image to expand and download.
         </p>
         <ShuffleExercisesButton className="mt-4" />
       </div>
