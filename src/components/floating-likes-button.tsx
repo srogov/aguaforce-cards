@@ -34,7 +34,7 @@ export function FloatingLikesButton() {
   return (
     <Link
       href="/likes"
-      className="group fixed bottom-6 left-6 z-50 flex items-center gap-2 rounded-full bg-white px-4 py-3 shadow-lg outline-1 outline-black/5 transition-transform hover:scale-105"
+      className="group fixed bottom-6 left-6 z-50 flex items-center gap-2 rounded-full bg-pink-100/70 px-3 py-2 shadow-lg outline-1 outline-black/5 transition-transform hover:scale-105"
     >
       {highlighted ? (
         <HeartIconSolid aria-hidden="true" className="size-8 shrink-0 text-red-500" />
