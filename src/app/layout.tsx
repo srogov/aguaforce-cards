@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { NavigationTracker } from "@/components/navigation-tracker";
 import { NotificationHost } from "@/components/notification-host";
 import { FloatingLikesButton } from "@/components/floating-likes-button";
+import { COMPANY } from "@/config";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,6 +32,14 @@ export const metadata: Metadata = {
     title,
     description,
   },
+  appleWebApp: {
+    title: COMPANY.brandName,
+    statusBarStyle: "default",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#08d9d6",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
