@@ -17,9 +17,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "AguaForce Exercise Library | Water Weight Workouts & Exercises";
+const description = "Discover dynamic water weight exercises in the AguaForce Exercise Library. Filter by target muscle groups, build custom workout routines, and train with fluid resistance.";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ?? (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  title: "AguaForce Exercise Library | Water Weight Workouts & Exercises",
-  description: "Discover dynamic water weight exercises in the AguaForce Exercise Library. Filter by target muscle groups, build custom workout routines, and train with fluid resistance.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

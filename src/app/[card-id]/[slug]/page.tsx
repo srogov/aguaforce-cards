@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { ArrowDownTrayIcon } from '@heroicons/react/20/solid'
 import { getCardById, getCardImageDownloadName } from '@/services/cards-service'
 import { parseSteps } from '@/lib/steps'
@@ -9,11 +10,36 @@ import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { ShareLinks } from '@/components/share-links'
 
-export default async function CardPage({
-  params,
-}: {
-  params: Promise<{ 'card-id': string; slug: string }>
-}) {
+type CardPageParams = Promise<{ 'card-id': string; slug: string }>
+
+export async function generateMetadata({ params }: { params: CardPageParams }): Promise<Metadata> {
+  const { 'card-id': cardId } = await params
+  const card = getCardById(cardId)
+
+  if (!card) {
+    return {}
+  }
+
+  const title = `${card.name} | AguaForce Exercise Library`
+
+  return {
+    title,
+    description: card.description,
+    openGraph: {
+      title,
+      description: card.description,
+      images: [{ url: card.imageSrc, alt: card.imageAlt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: card.description,
+      images: [card.imageSrc],
+    },
+  }
+}
+
+export default async function CardPage({ params }: { params: CardPageParams }) {
   const { 'card-id': cardId } = await params
   const card = getCardById(cardId)
 
