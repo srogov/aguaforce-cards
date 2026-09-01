@@ -3,13 +3,13 @@ import type { ComponentProps, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 const colorStyles = {
-  main: 'bg-indigo-600 text-white hover:bg-indigo-700',
-  plain: 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100',
+  main: 'bg-sky-600 text-white hover:bg-sky-700',
+  plain: 'bg-sky-50 text-sky-700 hover:bg-sky-100',
   pink: 'bg-pink-600 text-white hover:bg-pink-700',
 } as const
 
 const baseStyles =
-  'flex w-full cursor-pointer items-center justify-center gap-x-2 rounded-md border border-transparent px-8 py-3 text-base font-medium focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 focus:outline-hidden'
+  'flex w-full cursor-pointer items-center justify-center gap-x-2 rounded-md border border-transparent px-8 py-3 text-base font-medium focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-50 focus:outline-hidden'
 
 type ButtonColor = keyof typeof colorStyles
 

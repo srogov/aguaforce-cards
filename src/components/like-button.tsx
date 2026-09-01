@@ -16,7 +16,7 @@ export function LikeButton({ cardId }: { cardId: string }) {
   return (
     <Button color="plain" onClick={() => toggleLike(cardId)} aria-pressed={liked}>
       {liked ? (
-        <HeartIconSolid aria-hidden="true" className="size-5 text-red-400" />
+        <HeartIconSolid aria-hidden="true" className="size-5 text-pink-400" />
       ) : (
         <HeartIconOutline aria-hidden="true" className="size-5" />
       )}
@@ -47,7 +47,7 @@ export function LikeIconButton({
       className={className}
     >
       {liked ? (
-        <HeartIconSolid aria-hidden="true" className="size-5 text-red-400" />
+        <HeartIconSolid aria-hidden="true" className="size-5 text-pink-400" />
       ) : (
         <HeartIconOutline aria-hidden="true" className="size-5" />
       )}

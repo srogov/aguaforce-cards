@@ -153,7 +153,7 @@ export default function Header() {
                   <div className="flow-root">
                     <Link href="/likes" className="group -m-2 flex items-center p-2">
                       {highlighted ? (
-                        <HeartIconSolid aria-hidden="true" className="size-6 shrink-0 text-red-500" />
+                        <HeartIconSolid aria-hidden="true" className="size-6 shrink-0 text-pink-500" />
                       ) : (
                         <HeartIconOutline
                           aria-hidden="true"
@@ -163,7 +163,7 @@ export default function Header() {
                       <span className="ml-1 inline-flex h-5 items-center overflow-hidden">
                         <span
                           key={likedCount}
-                          className={`inline-block text-sm font-medium ${highlighted ? 'text-red-500' : 'text-gray-700 group-hover:text-gray-800'} ${
+                          className={`inline-block text-sm font-medium ${highlighted ? 'text-pink-500' : 'text-gray-700 group-hover:text-gray-800'} ${
                             countAnimation === 'in'
                               ? 'animate-[like-count-in_200ms_ease-out]'
                               : countAnimation === 'out'
