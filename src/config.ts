@@ -12,5 +12,5 @@ export const LINKS = {
 
 export const COMPANY = {
     legalName: 'Agua Force, LLC',
-    brandName: 'Aguaforce'
+    brandName: 'AguaForce'
 }

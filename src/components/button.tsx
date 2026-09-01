@@ -6,6 +6,7 @@ const colorStyles = {
   main: 'bg-sky-600 text-white hover:bg-sky-700',
   plain: 'bg-sky-50 text-sky-700 hover:bg-sky-100',
   pink: 'bg-pink-600 text-white hover:bg-pink-700',
+  outline: 'border-sky-600 bg-transparent text-sky-600 hover:bg-sky-50',
 } as const
 
 const baseStyles =

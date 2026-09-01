@@ -1,6 +1,7 @@
 import { connection } from 'next/server'
 import { ExerciseCatalog } from '@/components/exercise-catalog'
 import { ShuffleExercisesButton } from '@/components/shuffle-exercises-button'
+import { InstallAppButton } from '@/components/install-app-button'
 import { BackLink } from '@/components/back-link'
 
 export default async function Likes() {
@@ -9,15 +10,18 @@ export default async function Likes() {
   await connection()
   return (
     <ExerciseCatalog onlyLiked layout="list">
-      <div className="pt-6 sm:pt-10">
+      <div className="flex items-center justify-between pt-6 sm:pt-10">
         <BackLink href="/" label="All Exercises" />
+        <InstallAppButton />
       </div>
       <div className="py-8 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-gray-900">Saved Exercises</h1>
         <p className="mx-auto mt-4 max-w-3xl text-base text-gray-500">
           Build your custom AguaForce routine with your saved exercises. Shuffle the sequence anytime, or click an image to expand and download.
         </p>
-        <ShuffleExercisesButton className="mt-4" />
+        <div className="mt-4 mb-8 flex justify-center gap-3">
+          <ShuffleExercisesButton />
+        </div>
       </div>
     </ExerciseCatalog>
   )
