@@ -1,0 +1,62 @@
+# AguaForce Exercise Library
+
+> A free, browsable exercise library for AguaForce water weights. Visitors filter exercises by target muscle area, view step-by-step instructions and tips for each movement, save favorites, and build/share a custom workout routine.
+
+Built with Next.js. Each exercise has its own detail page with a demonstration image, a description, a "Main Muscles" and "Supporting Muscles" breakdown, step-by-step "How to perform" instructions, form tips, a downloadable image, and social share links. The home page lets visitors filter the full catalog by target area (Arms, Back, Chest, Core/Abs, Glutes/Booty, Legs, Shoulders) or by individual muscle. Visitors can "like" exercises to save them to a personal list at /likes, which can be shuffled into a workout order.
+
+AguaForce sells water-filled free weights ("water weights") that use fluid resistance instead of fixed iron plates; this site is the exercise/how-to companion to those products, distinct from the main commerce site at aguaforce.com.
+
+## Pages
+
+- [Exercise Library (home)](https://cards.aguaforce.com/): Full catalog of all 36 exercises, filterable by target area and muscle. Supports shareable filtered links via query params.
+- [Saved Exercises](https://cards.aguaforce.com/likes): A visitor's liked/saved exercises, shown as a list that can be shuffled into a custom routine order.
+
+## Exercises
+
+- [Deadlift](https://cards.aguaforce.com/exercise-1/deadlift): Builds total-body strength through a hip-hinge pattern, targeting the glutes, hamstrings, and lower back while reinforcing safe lifting mechanics. Main muscles: Glutes, Lower Back. Supporting: Abs, Calves, Hamstrings, Quadriceps.
+- [Romanian Deadlift](https://cards.aguaforce.com/exercise-2/romanian-deadlift): Targets the hamstrings and glutes through a controlled hip hinge, improving posterior chain strength and flexibility. Main muscles: Hamstrings. Supporting: Abs, Calves, Glutes, Lower Back.
+- [Straight Leg Deadlift](https://cards.aguaforce.com/exercise-3/straight-leg-deadlift): Emphasizes hamstring flexibility and posterior chain strength with a near-straight-leg hip hinge. Main muscles: Glutes, Lower Back, Hamstrings. Supporting: Adductors, Trapezius, Forearm Flexors.
+- [Single Leg Romanian Deadlift](https://cards.aguaforce.com/exercise-4/single-leg-romanian-deadlift): Builds unilateral hamstring and glute strength while challenging balance and hip stability. Main muscles: Hamstrings, Glutes. Supporting: Abs, Calves, Lower Back.
+- [Swing](https://cards.aguaforce.com/exercise-5/swing): Develops explosive hip power and cardiovascular conditioning by driving the weight up with an aggressive hip hinge. Main muscles: Glutes, Quadriceps, Shoulders. Supporting: Abs, Calves, Hamstrings, Lower Back.
+- [Front Squat](https://cards.aguaforce.com/exercise-6/front-squat): Strengthens the glutes and quadriceps while building core stability from holding the weight at the chest. Main muscles: Glutes, Quadriceps. Supporting: Abs, Calves, Hamstrings.
+- [Sumo Squat](https://cards.aguaforce.com/exercise-7/sumo-squat): Targets the glutes and inner thighs with a wide-stance squat that builds lower-body strength and hip mobility. Main muscles: Glutes, Quadriceps. Supporting: Abs, Calves, Hamstrings.
+- [Split Squat](https://cards.aguaforce.com/exercise-8/split-squat): Builds unilateral leg strength and stability in the quadriceps, hamstrings, and calves through a staggered stance. Main muscles: Calves, Hamstrings, Quadriceps. Supporting: Abs.
+- [Forward Lunges](https://cards.aguaforce.com/exercise-9/forward-lunges): Develops lower-body strength and balance by targeting the glutes and quadriceps through alternating forward steps. Main muscles: Glutes, Quadriceps. Supporting: Hamstrings, Abs, Calves.
+- [Kneeling Squat](https://cards.aguaforce.com/exercise-10/kneeling-squat): Isolates the glutes with a controlled kneeling hip-hinge motion, reducing knee strain while building hip strength. Main muscles: Glutes. Supporting: Hamstrings, Abs, Quadriceps.
+- [Glute Bridge](https://cards.aguaforce.com/exercise-11/glute-bridge): Strengthens the glutes and core through hip extension, also engaging the hamstrings and lower back for hip stability. Main muscles: Glutes. Supporting: Abs, Lower Back, Hamstrings.
+- [Overhead Crunch](https://cards.aguaforce.com/exercise-12/overhead-crunch): Builds core and ab strength through a crunch pattern made more challenging by holding the weight overhead. Main muscles: Abs, Obliques. Supporting: Glutes, Quadriceps, Iliopsoas.
+- [Frog Crunch](https://cards.aguaforce.com/exercise-13/frog-crunch): Targets the abs with a crunch variation that opens the hips, adding a light stretch through the inner thighs. Main muscles: Abs. Supporting: Quads, Hip Flexors.
+- [Russian Twist](https://cards.aguaforce.com/exercise-14/russian-twist): Builds rotational core strength, targeting the abs and obliques through controlled side-to-side twisting. Main muscles: Abs, Obliques. Supporting: Biceps, Forearms, Lower Back.
+- [Side Bend](https://cards.aguaforce.com/exercise-15/side-bend): Isolates the obliques through a controlled lateral bend, building core strength and stability on each side. Main muscles: Obliques. Supporting: Abs.
+- [Bent Over Row](https://cards.aguaforce.com/exercise-16/bent-over-row): Strengthens the back and biceps through a horizontal pulling motion while reinforcing a flat-back hip hinge. Main muscles: Back. Supporting: Abs, Shoulders, Arms.
+- [Bent Over Reverse Fly](https://cards.aguaforce.com/exercise-17/bent-over-reverse-fly): Targets the rear shoulders and upper back, improving posture through a controlled arm raise from a hip hinge. Main muscles: Shoulders. Supporting: Upper Back, Triceps.
+- [Gorilla Row](https://cards.aguaforce.com/exercise-18/gorilla-row): Builds back and shoulder strength through alternating rows from a deadlift-like stance, challenging core stability. Main muscles: Middle Back, Upper Back, Lats, Shoulders. Supporting: Abs, Biceps, Triceps, Forearms, Glutes.
+- [Bent Over Kickback](https://cards.aguaforce.com/exercise-19/bent-over-kickback): Isolates the triceps through a controlled arm extension from a hinged position, building arm strength and stability. Main muscles: Triceps. Supporting: Forearms, Abs, Lower Back.
+- [Triceps Kickback](https://cards.aguaforce.com/exercise-20/triceps-kickback): Isolates the triceps with a bench-supported single-arm extension, building arm strength and stability. Main muscles: Triceps. Supporting: Abs, Forearms.
+- [Concentration Curl](https://cards.aguaforce.com/exercise-21/concentration-curl): Isolates the biceps through a seated, braced curl that minimizes momentum for focused arm strength. Main muscles: Biceps. Supporting: Forearms.
+- [Alternate Biceps Curl](https://cards.aguaforce.com/exercise-22/alternate-biceps-curl): Builds bicep strength through alternating curls, keeping each arm working independently with control. Main muscles: Biceps. Supporting: Forearms.
+- [Alternate Hammer Curl](https://cards.aguaforce.com/exercise-23/alternate-hammer-curl): Targets the biceps and forearms with a neutral-grip curl, alternating arms for balanced strength. Main muscles: Biceps. Supporting: Forearms.
+- [Reverse Curl](https://cards.aguaforce.com/exercise-24/reverse-curl): Strengthens the biceps and forearms through an overhand-grip curl that emphasizes grip and forearm engagement. Main muscles: Biceps. Supporting: Forearms.
+- [Overhead Triceps Extension](https://cards.aguaforce.com/exercise-25/overhead-triceps-extension): Isolates the triceps through an overhead arm extension, building upper-arm strength and shoulder stability. Main muscles: Triceps. Supporting: Abs, Shoulders.
+- [Upright Row](https://cards.aguaforce.com/exercise-26/upright-row): Builds shoulder and upper-back strength by pulling the weights vertically along the body toward shoulder height. Main muscles: Shoulders. Supporting: Abs, Biceps, Forearms, Upper Back.
+- [Armpit Row](https://cards.aguaforce.com/exercise-27/armpit-row): Targets the lateral shoulders and upper back through a wide-elbow pulling motion toward the armpits. Main muscles: Lateral Deltoid. Supporting: Brachialis, Brachioradialis, Serratus Anterior, Biceps.
+- [Lateral Raise](https://cards.aguaforce.com/exercise-28/lateral-raise): Isolates the shoulders through a controlled side raise, building width and stability in the deltoids. Main muscles: Shoulders.
+- [Front Raise](https://cards.aguaforce.com/exercise-29/front-raise): Targets the front shoulders through a controlled forward raise, building shoulder strength and core stability. Main muscles: Abs, Shoulders. Supporting: Upper Back, Lower Traps.
+- [Alternate Front Raise](https://cards.aguaforce.com/exercise-30/alternate-front-raise): Builds shoulder strength through alternating front raises, challenging balance and core stability. Main muscles: Shoulders. Supporting: Abs.
+- [Halo](https://cards.aguaforce.com/exercise-31/halo): Improves shoulder mobility and core stability by circling the weight around the head with control. Main muscles: Shoulders. Supporting: Triceps, Upper Back.
+- [Pullover](https://cards.aguaforce.com/exercise-32/pullover): Strengthens the chest, upper back, and lats through an overhead arm movement performed on a bench. Main muscles: Chest, Upper Back, Lower Traps. Supporting: Abs, Shoulders, Triceps.
+- [Svend Press](https://cards.aguaforce.com/exercise-33/svend-press): Builds chest and tricep strength through a squeeze-and-press motion that emphasizes constant muscle tension. Main muscles: Chest. Supporting: Biceps, Triceps.
+- [Chest Press](https://cards.aguaforce.com/exercise-34/chest-press): Strengthens the chest, shoulders, and triceps through a pressing motion performed lying on the floor. Main muscles: Chest. Supporting: Abs, Shoulders, Triceps.
+- [Shoulder Press](https://cards.aguaforce.com/exercise-35/shoulder-press): Builds shoulder and tricep strength through a seated overhead press, also engaging the core for stability. Main muscles: Shoulders. Supporting: Abs, Triceps, Upper Back.
+- [Squat with Alternating Wave](https://cards.aguaforce.com/exercise-36/squat-with-alternating-wave): Combines a squat with alternating arm punches to build lower-body strength and coordination between arms and legs. Main muscles: Abs, Shoulders, Upper Back. Supporting: Biceps, Glutes, Calves, Hamstrings, Quadriceps.
+
+## Target Areas
+
+Exercises can be filtered by these target areas, each mapping to one or more specific muscles: Arms, Back, Chest, Core/Abs, Glutes/Booty, Legs, Shoulders.
+
+## Optional
+
+- [AguaForce Shop](https://www.aguaforce.com): The main commerce site selling AguaForce water weights.
+- [Terms](https://www.aguaforce.com/terms): Terms of service.
+- [Privacy](https://www.aguaforce.com/privacy): Privacy policy.
+- [Contact](https://www.aguaforce.com/contact): Contact AguaForce.
