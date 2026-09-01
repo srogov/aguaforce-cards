@@ -27,7 +27,7 @@ export function LikeButton({ cardId }: { cardId: string }) {
 
 export function LikeIconButton({
   cardId,
-  className = 'absolute top-2 right-2 z-10 flex size-8 cursor-pointer items-center justify-center rounded-full bg-white/80 shadow-sm backdrop-blur-sm hover:bg-white',
+  className = 'absolute top-2 right-2 z-10 flex size-8 cursor-pointer items-center justify-center rounded-full bg-white/80 text-gray-700 shadow-sm backdrop-blur-sm hover:bg-white',
 }: {
   cardId: string
   className?: string
@@ -49,7 +49,7 @@ export function LikeIconButton({
       {liked ? (
         <HeartIconSolid aria-hidden="true" className="size-5 text-red-400" />
       ) : (
-        <HeartIconOutline aria-hidden="true" className="size-5 text-gray-700" />
+        <HeartIconOutline aria-hidden="true" className="size-5" />
       )}
     </button>
   )

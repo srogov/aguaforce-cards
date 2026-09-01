@@ -31,7 +31,7 @@ export function CardDetailsDrawer({
       titleAction={
         <LikeIconButton
           cardId={card.id}
-          className="flex size-8 items-center justify-center rounded-full text-gray-400 hover:text-gray-500 dark:hover:text-white"
+          className="flex size-8 items-center justify-center rounded-full text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-white"
         />
       }
       open={open}
@@ -52,15 +52,18 @@ export function CardDetailsDrawer({
           width={1200}
           height={900}
           sizes="(min-width: 640px) 42rem, 100vw"
-          className="aspect-4/3 w-full rounded-lg bg-gray-100 object-cover shadow-sm"
+          className="aspect-4/3 w-full rounded-lg bg-gray-100 object-cover shadow-sm dark:bg-gray-800"
         />
 
-        <p className="mt-6 text-gray-500">{card.description}</p>
+        <p className="mt-6 text-gray-500 dark:text-gray-400">{card.description}</p>
 
-        <div className="mt-6 border-t border-gray-200 pt-6">
-          <h3 className="font-medium text-gray-900">Main Muscles</h3>
+        <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-700">
+          <h3 className="font-medium text-gray-900 dark:text-white">Main Muscles</h3>
           <div className="mt-4">
-            <ul role="list" className="list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300">
+            <ul
+              role="list"
+              className="list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300 dark:text-gray-400 dark:marker:text-gray-600"
+            >
               {card.muscles.map((muscle) => (
                 <li key={muscle} className="pl-2">
                   {muscle}
@@ -71,9 +74,12 @@ export function CardDetailsDrawer({
         </div>
 
         <div className="mt-4">
-          <h3 className="font-medium text-gray-900">Supporting Muscles</h3>
+          <h3 className="font-medium text-gray-900 dark:text-white">Supporting Muscles</h3>
           <div className="mt-4">
-            <ul role="list" className="list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300">
+            <ul
+              role="list"
+              className="list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300 dark:text-gray-400 dark:marker:text-gray-600"
+            >
               {card.muscles2.map((muscle) => (
                 <li key={muscle} className="pl-2">
                   {muscle}
@@ -83,11 +89,11 @@ export function CardDetailsDrawer({
           </div>
         </div>
 
-        <div className="mt-6 border-t border-gray-200 pt-6 text-gray-500 *:first:mt-0">
+        <div className="mt-6 border-t border-gray-200 pt-6 text-gray-500 *:first:mt-0 dark:border-gray-700 dark:text-gray-400">
           {stepsBlocks.map((block, index) => {
             if (block.type === 'heading') {
               return (
-                <h3 key={index} className="font-medium text-gray-900 mt-4 first:mt-0">
+                <h3 key={index} className="font-medium text-gray-900 mt-4 first:mt-0 dark:text-white">
                   {block.text}
                 </h3>
               )
@@ -97,7 +103,7 @@ export function CardDetailsDrawer({
               <ul
                 key={index}
                 role="list"
-                className="mt-4 list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300"
+                className="mt-4 list-disc space-y-1 pl-5 text-sm/6 text-gray-500 marker:text-gray-300 dark:text-gray-400 dark:marker:text-gray-600"
               >
                 {block.items.map((item, itemIndex) => (
                   <li key={itemIndex} className="pl-2">
