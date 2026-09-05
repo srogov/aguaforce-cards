@@ -47,7 +47,8 @@ export function getLikedCardIds(): string[] {
     const parsed = JSON.parse(raw)
     return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : []
   } catch {
-    warnStorageUnavailable()
+    // Reading happens on every page load (header, saved list, etc.) — don't warn here.
+    // The warning is reserved for saveLikedCardIds, which only runs on an actual like/unlike action.
     return []
   }
 }
