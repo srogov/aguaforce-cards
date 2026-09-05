@@ -1,12 +1,25 @@
 'use client'
 
+import { useSyncExternalStore } from 'react'
 import { ArrowsRightLeftIcon } from '@heroicons/react/20/solid'
 
 import { Button } from '@/components/button'
-import { shuffleLikedCardIds } from '@/services/likes-service'
+import { getLikedCardIds, shuffleLikedCardIds, subscribeToLikedCardIds } from '@/services/likes-service'
 import { notify } from '@/services/notification-service'
 
+function getServerLikedCardIdsKey() {
+  return ''
+}
+
 export function ShuffleExercisesButton() {
+  const likedCardIdsKey = useSyncExternalStore(
+    subscribeToLikedCardIds,
+    () => getLikedCardIds().join(','),
+    getServerLikedCardIdsKey,
+  )
+
+  if (!likedCardIdsKey) return null
+
   return (
     <Button
       onClick={() => {

@@ -18,6 +18,7 @@ import {
 } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Button } from '@/components/button'
 import { RemovableBadge } from '@/components/badge'
 import { LikeIconButton } from '@/components/like-button'
 import { CardDetailsDrawer } from '@/components/card-details-drawer'
@@ -591,12 +592,9 @@ export function ExerciseCatalog({
                   Experience dynamic fluid resistance with AguaForce water-filled weights. Order yours today to build your custom home routine.
                 </p>
               </div>
-              <a
-                href={LINKS.shop}
-                className="mt-6 flex shrink-0 items-center justify-center rounded-md border border-white/25 px-4 py-3 text-base font-medium text-white hover:bg-white/10 sm:mt-0 sm:ml-8 lg:ml-0 lg:w-full"
-              >
-                Get AguaForce Weights
-              </a>
+              <Button href={LINKS.shop} color="pink" className="mt-6 shrink-0 sm:mt-0 sm:ml-8 lg:ml-0">
+                Buy AguaForce Weights
+              </Button>
             </div>
           </section>
         </Container>

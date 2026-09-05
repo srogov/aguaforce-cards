@@ -1,12 +1,28 @@
+import { notify } from '@/services/notification-service'
+
 const LIKES_STORAGE_KEY = 'aguaforce-liked-cards'
 const LIKES_CHANGED_EVENT = 'aguaforce-likes-changed'
+
+// Only warn once per page load so a disabled/full storage doesn't spam a notification on every like.
+let storageWarningShown = false
+
+function warnStorageUnavailable(): void {
+  if (storageWarningShown) return
+  storageWarningShown = true
+  notify({
+    type: 'warning',
+    title: "Likes won't be saved",
+    message: 'Your browser is blocking local storage. Enable local storage (or turn off private/incognito mode) to save liked cards.',
+  })
+}
 
 function saveLikedCardIds(ids: string[]): void {
   if (typeof window === 'undefined') return
   try {
     localStorage.setItem(LIKES_STORAGE_KEY, JSON.stringify(ids))
   } catch {
-    // localStorage unavailable (quota exceeded, private browsing, etc.) — ignore
+    // localStorage unavailable (quota exceeded, private browsing, disabled, etc.)
+    warnStorageUnavailable()
   }
   window.dispatchEvent(new Event(LIKES_CHANGED_EVENT))
 }
@@ -31,6 +47,7 @@ export function getLikedCardIds(): string[] {
     const parsed = JSON.parse(raw)
     return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : []
   } catch {
+    warnStorageUnavailable()
     return []
   }
 }
