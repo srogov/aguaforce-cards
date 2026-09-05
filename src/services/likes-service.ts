@@ -12,16 +12,58 @@ function warnStorageUnavailable(): void {
   notify({
     type: 'warning',
     title: "Likes won't be saved",
-    message: 'Your browser is blocking local storage. Enable local storage (or turn off private/incognito mode) to save liked cards.',
+    message: 'Your browser is blocking local storage and cookies, so liked cards can only be kept for this page view. Enable one of them (or turn off private/incognito mode) to save your likes.',
   })
+}
+
+function readCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null
+  const match = document.cookie.split('; ').find((entry) => entry.startsWith(`${name}=`))
+  if (!match) return null
+  try {
+    return decodeURIComponent(match.slice(name.length + 1))
+  } catch {
+    return null
+  }
+}
+
+// Writes the cookie and reads it straight back, since a browser blocking cookies
+// silently no-ops the assignment instead of throwing.
+function writeCookie(name: string, value: string): boolean {
+  if (typeof document === 'undefined') return false
+  try {
+    document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=31536000; SameSite=Lax`
+    return document.cookie.split('; ').some((entry) => entry.startsWith(`${name}=`))
+  } catch {
+    return false
+  }
+}
+
+function readRawIds(): string | null {
+  if (typeof window === 'undefined') return null
+  try {
+    const raw = localStorage.getItem(LIKES_STORAGE_KEY)
+    if (raw !== null) return raw
+  } catch {
+    // localStorage unavailable — fall back to the cookie below.
+  }
+  return readCookie(LIKES_STORAGE_KEY)
 }
 
 function saveLikedCardIds(ids: string[]): void {
   if (typeof window === 'undefined') return
+  const json = JSON.stringify(ids)
+  let saved = false
   try {
-    localStorage.setItem(LIKES_STORAGE_KEY, JSON.stringify(ids))
+    localStorage.setItem(LIKES_STORAGE_KEY, json)
+    saved = true
   } catch {
-    // localStorage unavailable (quota exceeded, private browsing, disabled, etc.)
+    // localStorage unavailable (quota exceeded, private browsing, disabled, etc.) — try cookies next.
+  }
+  if (!saved) {
+    saved = writeCookie(LIKES_STORAGE_KEY, json)
+  }
+  if (!saved) {
     warnStorageUnavailable()
   }
   window.dispatchEvent(new Event(LIKES_CHANGED_EVENT))
@@ -40,10 +82,9 @@ export function subscribeToLikedCardIds(onChange: () => void): () => void {
 }
 
 export function getLikedCardIds(): string[] {
-  if (typeof window === 'undefined') return []
+  const raw = readRawIds()
+  if (!raw) return []
   try {
-    const raw = localStorage.getItem(LIKES_STORAGE_KEY)
-    if (!raw) return []
     const parsed = JSON.parse(raw)
     return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : []
   } catch {
